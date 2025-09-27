@@ -44,10 +44,21 @@
     section p, section ul, section ol { font-size: 1rem; margin-bottom: 12px; }
     ul { margin-left: 20px; list-style-type: disc; }
     ol { margin-left: 20px; list-style-type: decimal; }
-    .profile-photo {
-      display: block; max-width: 180px; border-radius: 10%;
-      margin: 0 auto 16px auto; box-shadow: 0 0 6px rgba(0,0,0,0.1);
+
+    /* About Section Layout */
+    .about-container {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
     }
+    .profile-photo {
+      max-width: 180px;
+      border-radius: 10%;
+      margin: 0;
+      box-shadow: 0 0 6px rgba(0,0,0,0.1);
+    }
+    .about-text { flex: 1; }
+
     .pill {
       display: inline-block; padding: 6px 10px; margin: 6px 6px 0 0;
       background:#e8f1fb; color:#0056b3; border-radius:999px; font-size: 0.9rem; border:1px solid #c9defa;
@@ -84,6 +95,8 @@
       header h1 { font-size: 1.8rem; }
       nav ul { flex-direction: column; }
       nav ul li { margin: 5px 0; }
+      .about-container { flex-direction: column; align-items: center; text-align: center; }
+      .about-text { text-align: left; }
     }
   </style>
 </head>
@@ -115,21 +128,25 @@
     <!-- About -->
     <section id="about">
       <h2>About Me</h2>
-      <img src="profile.jpg" alt="Profile Photo" class="profile-photo" />
-      <p class="card">
-        I build <strong>efficient perception systems</strong> for autonomy that run <strong>real-time on edge hardware</strong>.
-        My work spans <strong>camera-only BEV</strong> (TinyBEV), <strong>radar–vision fusion</strong> for adverse weather,
-        <strong>sensor–optics–model co-design</strong> (RAW-to-task) for robustness, and <strong>evaluation frameworks</strong>
-        for 3D reconstruction (4DCF). I care about <em>latency, reliability, and deployment</em>—profiling, pruning,
-        quantization, TensorRT, and mixed precision to hit FPS targets without sacrificing safety.
-      </p>
-      <div>
-        <span class="pill">Real-Time BEV</span>
-        <span class="pill">EdgeAI</span>
-        <span class="pill">Radar–Vision Fusion</span>
-        <span class="pill">RAW-to-Task Co-Design</span>
-        <span class="pill">Embedded Deployment</span>
-        <span class="pill">3D Perception</span>
+      <div class="about-container">
+        <img src="profile.jpg" alt="Profile Photo" class="profile-photo" />
+        <div class="about-text">
+          <p class="card">
+            I build <strong>efficient perception systems</strong> for autonomy that run <strong>real-time on edge hardware</strong>.
+            My work spans <strong>camera-only BEV</strong> (TinyBEV), <strong>radar–vision fusion</strong> for adverse weather,
+            <strong>sensor–optics–model co-design</strong> (RAW-to-task) for robustness, and <strong>evaluation frameworks</strong>
+            for 3D reconstruction (4DCF). I care about <em>latency, reliability, and deployment</em>—profiling, pruning,
+            quantization, TensorRT, and mixed precision to hit FPS targets without sacrificing safety.
+          </p>
+          <div>
+            <span class="pill">Real-Time BEV</span>
+            <span class="pill">EdgeAI</span>
+            <span class="pill">Radar–Vision Fusion</span>
+            <span class="pill">RAW-to-Task Co-Design</span>
+            <span class="pill">Embedded Deployment</span>
+            <span class="pill">3D Perception</span>
+          </div>
+        </div>
       </div>
     </section>
 
