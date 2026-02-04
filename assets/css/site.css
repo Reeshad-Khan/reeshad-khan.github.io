@@ -124,3 +124,21 @@ body{ color:var(--ink); background:var(--bg); }
   .pub-thumb img{ height: 160px; }
   .timeline-item{ grid-template-columns: 90px 44px 1fr; }
 }
+
+/* Keep ClustrMaps globe inside the card */
+.map-frame{
+  width: 100%;
+  height: 320px;        /* adjust if you want bigger */
+  overflow: hidden;     /* prevents the globe from spilling out */
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: #fff;
+  position: relative;
+}
+
+/* ClustrMaps sometimes injects inline sizes; help it behave */
+.map-frame canvas,
+.map-frame iframe,
+.map-frame div{
+  max-width: 100% !important;
+}
