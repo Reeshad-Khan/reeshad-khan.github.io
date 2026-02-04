@@ -1,628 +1,230 @@
+---
+layout: none
+---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ site.title }} — Efficient AI & Autonomous Perception</title>
+  <meta name="description" content="{{ site.description }}" />
 
-  <title>Reeshad Khan — Computer Vision & Autonomous Systems</title>
-  <meta name="description" content="Reeshad Khan — Computer Vision & Autonomous Systems: Efficient BEV perception, radar–vision fusion, RAW-to-task co-design, real-time EdgeAI deployment." />
-
-  <!-- Optional: nicer system font stack -->
-  <style>
-    :root{
-      --bg: #0b0f19;
-      --panel: rgba(255,255,255,0.06);
-      --panel-2: rgba(255,255,255,0.08);
-      --text: rgba(255,255,255,0.90);
-      --muted: rgba(255,255,255,0.70);
-      --faint: rgba(255,255,255,0.55);
-      --line: rgba(255,255,255,0.12);
-      --accent: #7aa2ff;
-      --accent-2: #6ee7ff;
-      --good: #34d399;
-
-      --maxw: 1050px;
-      --radius: 16px;
-      --shadow: 0 14px 40px rgba(0,0,0,0.35);
-
-      --h1: clamp(1.8rem, 3vw, 2.35rem);
-      --h2: clamp(1.25rem, 2vw, 1.5rem);
-      --h3: 1.02rem;
-      --p: 0.98rem;
-    }
-
-    /* Light mode (auto) */
-    @media (prefers-color-scheme: light) {
-      :root{
-        --bg:#f7f8fb;
-        --panel: rgba(0,0,0,0.04);
-        --panel-2: rgba(0,0,0,0.06);
-        --text: rgba(0,0,0,0.88);
-        --muted: rgba(0,0,0,0.62);
-        --faint: rgba(0,0,0,0.52);
-        --line: rgba(0,0,0,0.10);
-        --shadow: 0 16px 48px rgba(0,0,0,0.10);
-        --accent:#2f5cff;
-        --accent-2:#0096c7;
-      }
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      background: radial-gradient(1200px 800px at 20% -10%, rgba(122,162,255,0.22), transparent 55%),
-                  radial-gradient(900px 600px at 90% 10%, rgba(110,231,255,0.18), transparent 55%),
-                  var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    a{ color: var(--text); text-decoration: none; }
-    a:hover{ text-decoration: underline; text-decoration-color: rgba(122,162,255,0.55); }
-    .muted{ color: var(--muted); }
-    .faint{ color: var(--faint); }
-
-    .wrap{ width: min(var(--maxw), calc(100% - 40px)); margin: 0 auto; }
-
-    /* Top nav */
-    .nav{
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(14px);
-      background: linear-gradient(to bottom, rgba(10,14,24,0.75), rgba(10,14,24,0.35));
-      border-bottom: 1px solid var(--line);
-    }
-    @media (prefers-color-scheme: light) {
-      .nav{
-        background: linear-gradient(to bottom, rgba(247,248,251,0.85), rgba(247,248,251,0.55));
-      }
-    }
-    .nav-inner{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding: 10px 0;
-      gap: 14px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:10px;
-      font-weight: 700;
-      letter-spacing: 0.2px;
-      white-space: nowrap;
-    }
-    .dot{
-      width:10px; height:10px; border-radius:999px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      box-shadow: 0 0 0 3px rgba(122,162,255,0.18);
-    }
-    .nav-links{
-      display:flex; gap: 14px; flex-wrap: wrap; justify-content:flex-end;
-      font-size: 0.92rem;
-    }
-    .nav-links a{
-      padding: 8px 10px;
-      border-radius: 10px;
-      text-decoration:none;
-      color: var(--muted);
-    }
-    .nav-links a:hover{
-      background: var(--panel);
-      color: var(--text);
-      text-decoration:none;
-    }
-
-    /* Hero */
-    .hero{ padding: 42px 0 24px; }
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 18px;
-      align-items: stretch;
-    }
-    @media (max-width: 900px){
-      .hero-grid{ grid-template-columns: 1fr; }
-    }
-    .hero-card{
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 22px;
-      overflow:hidden;
-      position: relative;
-    }
-    .hero-card::before{
-      content:"";
-      position:absolute;
-      inset:-1px;
-      background: radial-gradient(900px 260px at 10% 0%, rgba(122,162,255,0.22), transparent 55%),
-                  radial-gradient(700px 240px at 90% 10%, rgba(110,231,255,0.18), transparent 55%);
-      pointer-events:none;
-      opacity:0.9;
-    }
-    .hero-card > *{ position: relative; }
-
-    h1{
-      margin: 0 0 6px;
-      font-size: var(--h1);
-      line-height: 1.18;
-      letter-spacing: -0.02em;
-    }
-    .subtitle{
-      margin: 0 0 14px;
-      font-size: 1.03rem;
-      color: var(--muted);
-    }
-
-    .chips{ display:flex; flex-wrap:wrap; gap: 8px; margin: 14px 0 6px; }
-    .chip{
-      font-size: 0.88rem;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.05);
-      color: var(--muted);
-    }
-    @media (prefers-color-scheme: light){
-      .chip{ background: rgba(0,0,0,0.03); }
-    }
-
-    .cta{ display:flex; flex-wrap:wrap; gap: 10px; margin-top: 14px; }
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.06);
-      color: var(--text);
-      font-weight: 650;
-      font-size: 0.95rem;
-      text-decoration:none;
-    }
-    .btn:hover{ text-decoration:none; background: rgba(255,255,255,0.10); }
-    .btn.primary{
-      background: linear-gradient(135deg, rgba(122,162,255,0.92), rgba(110,231,255,0.72));
-      border-color: rgba(255,255,255,0.14);
-      color: rgba(0,0,0,0.85);
-    }
-    .btn.primary:hover{ filter: brightness(1.02); }
-
-    /* Profile card */
-    .profile{
-      display:flex; flex-direction:column; gap: 12px;
-    }
-    .profile-top{
-      display:flex; gap: 14px; align-items:center;
-    }
-    .avatar{
-      width: 84px; height: 84px;
-      border-radius: 18px;
-      object-fit: cover;
-      border: 1px solid var(--line);
-      background: var(--panel-2);
-    }
-    .profile small{ color: var(--muted); }
-    .kv{
-      display:grid;
-      gap: 8px;
-      margin-top: 6px;
-      font-size: 0.95rem;
-    }
-    .kv a{ color: var(--text); }
-    .kv .row{
-      display:flex; gap: 10px; align-items:flex-start;
-      padding: 10px 12px;
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.05);
-    }
-    @media (prefers-color-scheme: light){
-      .kv .row{ background: rgba(0,0,0,0.03); }
-    }
-    .kv .label{
-      min-width: 70px;
-      color: var(--muted);
-      font-weight: 650;
-    }
-
-    /* Sections */
-    section{ padding: 22px 0; }
-    .sec-head{
-      display:flex; align-items:baseline; justify-content:space-between; gap: 14px; margin-bottom: 12px;
-    }
-    h2{
-      margin: 0;
-      font-size: var(--h2);
-      letter-spacing: -0.01em;
-    }
-    .divider{ border-top: 1px solid var(--line); margin-top: 18px; }
-
-    /* Cards / grids */
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 14px;
-    }
-    .col-12{ grid-column: span 12; }
-    .col-6{ grid-column: span 6; }
-    .col-4{ grid-column: span 4; }
-    @media (max-width: 900px){
-      .col-6,.col-4{ grid-column: span 12; }
-    }
-
-    .card{
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 16px;
-      box-shadow: 0 10px 28px rgba(0,0,0,0.20);
-    }
-    .card h3{
-      margin: 0 0 6px;
-      font-size: var(--h3);
-      letter-spacing: -0.01em;
-    }
-    .meta{
-      font-size: 0.92rem;
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
-    .bullets{ margin: 0; padding-left: 18px; color: var(--muted); }
-    .bullets li{ margin: 6px 0; }
-
-    .tagrow{ display:flex; flex-wrap:wrap; gap: 8px; margin-top: 10px; }
-    .tag{
-      font-size: 0.82rem;
-      padding: 4px 8px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      color: var(--muted);
-      background: rgba(255,255,255,0.05);
-    }
-    @media (prefers-color-scheme: light){
-      .tag{ background: rgba(0,0,0,0.03); }
-    }
-
-    .links{
-      margin-top: 10px;
-      display:flex; flex-wrap:wrap; gap: 10px;
-      font-size: 0.95rem;
-    }
-    .links a{
-      color: var(--accent);
-      font-weight: 650;
-      text-decoration:none;
-    }
-    .links a:hover{ text-decoration: underline; }
-
-    /* Publications list */
-    .pubs{ margin:0; padding-left: 18px; }
-    .pubs li{ margin: 10px 0; color: var(--muted); }
-    .pubs b{ color: var(--text); }
-
-    /* Footer */
-    footer{
-      padding: 26px 0 34px;
-      color: var(--faint);
-      font-size: 0.92rem;
-    }
-  </style>
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/site.css" />
 </head>
 
 <body>
-
-  <!-- NAV -->
-  <div class="nav">
-    <div class="wrap nav-inner">
-      <div class="brand"><span class="dot"></span> Reeshad Khan</div>
-      <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#focus">Focus</a>
-        <a href="#projects">Projects</a>
-        <a href="#publications">Publications</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-semibold" href="#top">{{ site.title }}</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div id="nav" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#news">News</a></li>
+          <li class="nav-item"><a class="nav-link" href="#research">Research</a></li>
+          <li class="nav-item"><a class="nav-link" href="#publications">Publications</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="#visitors">Visitors</a></li>
+        </ul>
       </div>
     </div>
-  </div>
+  </nav>
 
-  <!-- HERO -->
-  <header class="hero">
-    <div class="wrap hero-grid">
+  <header id="top" class="hero">
+    <div class="container py-5">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-8">
+          <h1 class="display-6 fw-bold mb-2">{{ site.title }}</h1>
+          <p class="lead mb-3">
+            Efficient AI (EdgeAI) & Autonomous Systems Perception — BEV • Radar–Vision Fusion • RAW-to-Task Co-Design
+          </p>
 
-      <div class="hero-card">
-        <h1>Computer Vision & Autonomous Systems</h1>
-        <p class="subtitle">
-          Efficient BEV perception • Radar–Vision fusion • RAW-to-task co-design • Real-time EdgeAI deployment
-        </p>
+          <div class="d-flex flex-wrap gap-2">
+            <a class="btn btn-primary" target="_blank" rel="noopener" href="https://github.com/Reeshad-Khan">GitHub</a>
+            <a class="btn btn-outline-primary" target="_blank" rel="noopener" href="https://scholar.google.com/citations?user=D3rO3W4AAAAJ">Google Scholar</a>
+            <a class="btn btn-outline-dark" href="/assets/cv/Reeshad_Khan_CV.pdf">CV (PDF)</a>
+          </div>
 
-        <div class="chips">
-          <span class="chip">BEV Perception & Planning</span>
-          <span class="chip">Multisensor Fusion</span>
-          <span class="chip">Robustness in adverse conditions</span>
-          <span class="chip">TensorRT / ONNX / Profiling</span>
-        </div>
-
-        <div class="cta">
-          <a class="btn primary" href="Resume_of_Reeshad_Khan.pdf" target="_blank" rel="noopener">Download Resume (PDF)</a>
-          <a class="btn" href="Reeshad%20Khan_CV.pdf" target="_blank" rel="noopener">CV (PDF)</a>
-          <a class="btn" href="https://scholar.google.com/citations?user=D3rO3W4AAAAJ" target="_blank" rel="noopener">Google Scholar</a>
-          <a class="btn" href="https://github.com/Reeshad-Khan" target="_blank" rel="noopener">GitHub</a>
-          <a class="btn" href="https://www.linkedin.com/in/reeshad-khan-a50207106/" target="_blank" rel="noopener">LinkedIn</a>
-        </div>
-
-        <div class="divider"></div>
-        <p class="muted" style="margin:14px 0 0;">
-          I build <b>deployment-minded</b> perception systems for autonomy: reliable outputs under noise,
-          tight batch-1 latency, and realistic evaluation (closed-loop where possible).
-        </p>
-      </div>
-
-      <div class="hero-card profile">
-        <div class="profile-top">
-          <img class="avatar" src="profile.jpg" alt="Reeshad Khan profile photo" />
-          <div>
-            <div style="font-weight:800; font-size:1.05rem;">Reeshad Khan, Ph.D.</div>
-            <small>Fayetteville, AR, USA</small><br/>
-            <small class="muted">Open to Research Scientist / Perception roles</small>
+          <div class="pill-row mt-4">
+            <span class="pill">Real-Time BEV</span>
+            <span class="pill">EdgeAI Deployment</span>
+            <span class="pill">Radar–Vision Fusion</span>
+            <span class="pill">RAW-to-Task Co-Design</span>
+            <span class="pill">3D Perception</span>
           </div>
         </div>
 
-        <div class="kv">
-          <div class="row">
-            <div class="label">Email</div>
-            <div><a href="mailto:rk010@uark.edu">rk010@uark.edu</a></div>
-          </div>
-          <div class="row">
-            <div class="label">Phone</div>
-            <div class="muted">+1 (479) 502-7320</div>
-          </div>
-          <div class="row">
-            <div class="label">Areas</div>
-            <div class="muted">BEV • Fusion • Robust sensing • Edge deployment</div>
-          </div>
-        </div>
-
-        <div class="tagrow" aria-label="Quick tags">
-          <span class="tag">Real-time</span>
-          <span class="tag">Robustness</span>
-          <span class="tag">Systems-aware ML</span>
-          <span class="tag">Autonomy stack</span>
+        <div class="col-lg-4 text-lg-end text-center">
+          <img class="profile" src="/assets/img/profile.jpg" alt="Reeshad Khan headshot" />
         </div>
       </div>
-
     </div>
   </header>
 
-  <main class="wrap">
+  <main class="container py-5">
 
-    <!-- ABOUT -->
-    <section id="about">
-      <div class="sec-head">
-        <h2>About</h2>
-        <div class="faint">Short, direct, and skimmable.</div>
-      </div>
-
-      <div class="card">
-        <p style="margin:0; font-size:var(--p);">
-          I design <b>efficient perception-to-planning</b> systems for autonomous platforms, with a focus on
-          <b>BEV representations</b>, <b>radar–vision fusion</b> for adverse conditions, and <b>sensor/optics/model co-design</b>
-          (RAW-to-task). I care about what happens after training: exportability, profiling, quantization,
-          and hitting <b>batch-1 latency</b> targets without fragile behavior.
-        </p>
-      </div>
-    </section>
-
-    <!-- FOCUS -->
-    <section id="focus">
-      <div class="sec-head">
-        <h2>Research Focus</h2>
-        <div class="faint">What you want people to remember.</div>
-      </div>
-
-      <div class="grid">
-        <div class="col-6 card">
-          <h3>Efficient AI / EdgeAI</h3>
-          <div class="meta">Compression, inference optimization, and deployability.</div>
-          <ul class="bullets">
-            <li>Pruning/quantization, AMP, ONNX export, TensorRT benchmarking</li>
-            <li>Profiling: kernel hotspots, memory pressure, batch-1 latency</li>
-            <li>Accuracy–latency Pareto mindset</li>
-          </ul>
+    <section id="about" class="section">
+      <div class="row g-4">
+        <div class="col-lg-8">
+          <h2 class="h3 fw-bold">About</h2>
+          <p class="text-muted mb-0">
+            I work on efficient perception systems for autonomy with an emphasis on real-time deployment: BEV perception,
+            multimodal fusion, and sensing-aware learning under noisy and resource-constrained settings.
+          </p>
         </div>
-
-        <div class="col-6 card">
-          <h3>Autonomous Perception</h3>
-          <div class="meta">BEV + fusion + robustness under real sensing constraints.</div>
-          <ul class="bullets">
-            <li>Camera-only BEV perception (detection/mapping/forecasting/planning)</li>
-            <li>Radar–vision fusion for fog/rain/low-light</li>
-            <li>Sensor–optics co-design (RAW-to-task) for robust semantics</li>
-          </ul>
+        <div class="col-lg-4">
+          <div class="card-soft">
+            <div class="small text-muted">Currently</div>
+            <div class="fw-semibold">Ph.D. (CS), University of Arkansas</div>
+            <div class="small text-muted">Dissertation defended Dec 8, 2025</div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- PROJECTS -->
-    <section id="projects">
-      <div class="sec-head">
-        <h2>Flagship Projects</h2>
-        <div class="faint">Pick 3–5. Keep them punchy.</div>
+    <section id="news" class="section">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <h2 class="h3 fw-bold mb-0">News</h2>
+        <div class="small text-muted">acceptances • awards • milestones</div>
       </div>
 
-      <div class="grid">
-        <div class="col-12 card">
-          <h3>TinyBEV — Cross-Modal Distillation for Camera-Only BEV (ICCV 2025 WDFM)</h3>
-          <div class="meta">Full-stack BEV (detection/mapping/forecasting/planning) distilled into a compact, real-time student.</div>
-          <ul class="bullets">
-            <li>Multi-stage distillation across features + outputs + region-aware supervision</li>
-            <li>Designed for deployment realism: runtime/memory tradeoffs and reproducible eval</li>
-          </ul>
-          <div class="links">
-            <a href="#" aria-disabled="true" title="Add your PDF link">Paper (soon)</a>
-            <a href="https://github.com/Reeshad-Khan" target="_blank" rel="noopener">Code</a>
+      <div class="timeline">
+        {% assign items = site.data.news | sort: "date" | reverse %}
+        {% for n in items %}
+          <div class="timeline-item">
+            <div class="timeline-date">{{ n.date }}</div>
+            <div class="timeline-dot">{{ n.icon }}</div>
+            <div class="timeline-content">{{ n.text }}</div>
           </div>
-          <div class="tagrow">
-            <span class="tag">BEV</span><span class="tag">Distillation</span><span class="tag">Real-time</span><span class="tag">Autonomy stack</span>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section id="research" class="section">
+      <h2 class="h3 fw-bold">Research</h2>
+
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="card-soft h-100">
+            <div class="fw-semibold">Efficient 3D Perception & BEV Autonomy</div>
+            <div class="text-muted small">
+              Resource-aware BEV perception/planning, distillation, and modular pipelines for autonomy.
+            </div>
           </div>
         </div>
-
-        <div class="col-12 card">
-          <h3>Learning to Sense for Driving — RAW-to-Task Optics–Sensor–Model Co-Design (under review)</h3>
-          <div class="meta">Differentiable sensing pipeline: optics + noise + quantization co-optimized with a compact segmentation head.</div>
-          <ul class="bullets">
-            <li>Robust semantics under low-light / blur / reduced bit-depth</li>
-            <li>Ablations + Pareto analysis for deployment-grade decisions</li>
-          </ul>
-          <div class="links">
-            <a href="#" aria-disabled="true" title="Add your arXiv link">Preprint (under review)</a>
-          </div>
-          <div class="tagrow">
-            <span class="tag">RAW-to-task</span><span class="tag">Robustness</span><span class="tag">Quantization</span><span class="tag">EdgeAI</span>
-          </div>
-        </div>
-
-        <div class="col-12 card">
-          <h3>Radar–Vision Fusion for Adverse Conditions (WACV 2026 project)</h3>
-          <div class="meta">Modular fusion (early/late/attention) targeting real-time and ablation-friendly design.</div>
-          <ul class="bullets">
-            <li>Reliability-aware fusion for rain/fog/low-light</li>
-            <li>Visualization + metrics tracking with safety-critical evaluation hooks</li>
-          </ul>
-          <div class="links">
-            <a href="#" aria-disabled="true" title="Add your link">Tech report (in prep)</a>
-          </div>
-          <div class="tagrow">
-            <span class="tag">Radar</span><span class="tag">Fusion</span><span class="tag">Adverse weather</span><span class="tag">nuScenes</span>
-          </div>
-        </div>
-
-        <div class="col-12 card">
-          <h3>4DCF — Robustness Evaluation for 3D Reconstruction (under review)</h3>
-          <div class="meta">A robustness suite that exposes failure modes beyond a single metric.</div>
-          <ul class="bullets">
-            <li>Diagnostics: spatial smoothness, scale stability, perturbation robustness, temporal consistency</li>
-          </ul>
-          <div class="links">
-            <a href="#" aria-disabled="true" title="Add your PDF link">Preprint</a>
-          </div>
-          <div class="tagrow">
-            <span class="tag">Evaluation</span><span class="tag">3D</span><span class="tag">Robustness</span>
+        <div class="col-md-6">
+          <div class="card-soft h-100">
+            <div class="fw-semibold">Robust Learning under Noisy Sensing</div>
+            <div class="text-muted small">
+              Sensing-aware learning, RAW-to-task pipelines, and restoration methods for challenging conditions.
+            </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <p class="muted" style="margin-top:12px;">
-        Earlier work: unsupervised MRI denoising/reconstruction (VISAPP 2025; IEEE Access) — now mainly used as technique background.
+    <section id="publications" class="section">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <h2 class="h3 fw-bold mb-0">Publications</h2>
+        <div class="small text-muted">click a title to open the PDF</div>
+      </div>
+
+      <div class="vstack gap-3">
+        {% assign pubs = site.data.publications | sort: "year" | reverse %}
+        {% for p in pubs %}
+          <article class="pub-card">
+            <div class="pub-main">
+              <div class="pub-status">{{ p.status }}</div>
+              <h3 class="h5 mb-1">
+                <a class="pub-title" href="{{ p.pdf }}">{{ p.title }}</a>
+              </h3>
+              <div class="text-muted small mb-2">
+                {{ p.authors }} · <span class="fw-semibold">{{ p.venue }}</span>
+              </div>
+
+              <div class="d-flex flex-wrap gap-2 mb-2">
+                {% for t in p.tags %}
+                  <span class="tag">{{ t }}</span>
+                {% endfor %}
+              </div>
+
+              <div class="d-flex flex-wrap gap-2">
+                <a class="btn btn-sm btn-primary" href="{{ p.pdf }}">PDF</a>
+              </div>
+            </div>
+
+            <div class="pub-thumb">
+              <a href="{{ p.pdf }}" aria-label="Open PDF">
+                <img src="{{ p.thumb }}" alt="Thumbnail for {{ p.title }}" />
+              </a>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <h2 class="h3 fw-bold">Contact</h2>
+      <div class="card-soft">
+        <div><span class="fw-semibold">Email:</span> <a href="mailto:rk010@uark.edu">rk010@uark.edu</a></div>
+        <div><span class="fw-semibold">LinkedIn:</span> <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/reeshad-khan-a50207106/">linkedin.com/in/reeshad-khan-a50207106</a></div>
+        <div><span class="fw-semibold">GitHub:</span> <a target="_blank" rel="noopener" href="https://github.com/Reeshad-Khan">github.com/Reeshad-Khan</a></div>
+      </div>
+    </section>
+
+    <section id="visitors" class="section">
+      <h2 class="h3 fw-bold">Visitors</h2>
+      <p class="text-muted small mb-3">
+        World visitor map + country counts (uses a third-party counter widget).
       </p>
-    </section>
 
-    <!-- PUBLICATIONS -->
-    <section id="publications">
-      <div class="sec-head">
-        <h2>Selected Publications</h2>
-        <div class="faint">Keep it curated + link to Scholar.</div>
-      </div>
-
-      <div class="card">
-        <ol class="pubs">
-          <li><b>TinyBEV</b>: Cross-Modal Knowledge Distillation for Efficient Multi-Task BEV Perception and Planning. <i>ICCV WDFM</i>, 2025.</li>
-          <li><b>Learning to Sense for Driving</b>: Joint Optics–Sensor–Model Co-Design for Semantic Segmentation. <i>Under review</i>.</li>
-          <li><b>4DCF</b>: Robust Evaluation of 3D Scene Reconstruction. <i>Under review</i>.</li>
-          <li><b>From Noise Estimation to Restoration</b>. <i>VISAPP</i>, 2025.</li>
-          <li><b>Learning from Oversampling for MRI Reconstruction</b>. <i>IEEE Access</i>, 2024.</li>
-        </ol>
-
-        <div class="links">
-          <a href="https://scholar.google.com/citations?user=D3rO3W4AAAAJ" target="_blank" rel="noopener">Full list on Google Scholar →</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- SKILLS -->
-    <section id="skills">
-      <div class="sec-head">
-        <h2>Skills</h2>
-        <div class="faint">Keyword-friendly for recruiters.</div>
-      </div>
-
-      <div class="grid">
-        <div class="col-4 card">
-          <h3>Perception</h3>
-          <ul class="bullets">
-            <li>Detection, segmentation, panoptic, BEV</li>
-            <li>3D reconstruction & evaluation</li>
-          </ul>
-        </div>
-
-        <div class="col-4 card">
-          <h3>EdgeAI</h3>
-          <ul class="bullets">
-            <li>Pruning, quantization, AMP</li>
-            <li>ONNX, TensorRT, profiling</li>
-          </ul>
-        </div>
-
-        <div class="col-4 card">
-          <h3>Stacks</h3>
-          <ul class="bullets">
-            <li>PyTorch, TensorFlow, OpenCV</li>
-            <li>CUDA, Docker, CI/CD, HPC</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact">
-      <div class="sec-head">
-        <h2>Contact</h2>
-        <div class="faint">Make it effortless.</div>
-      </div>
-
-      <div class="card">
-        <div class="grid" style="gap:10px;">
-          <div class="col-6">
-            <div class="muted">Email</div>
-            <div style="font-weight:750;"><a href="mailto:rk010@uark.edu">rk010@uark.edu</a></div>
-          </div>
-          <div class="col-6">
-            <div class="muted">LinkedIn</div>
-            <div style="font-weight:750;">
-              <a href="https://www.linkedin.com/in/reeshad-khan-a50207106/" target="_blank" rel="noopener">linkedin.com/in/reeshad-khan-a50207106</a>
+      <div class="row g-3">
+        <div class="col-lg-6">
+          <div class="card-soft">
+            <div class="fw-semibold mb-2">World Map</div>
+            <div class="ratio ratio-16x9">
+              <div>
+                <script type="text/javascript" id="clstr_globe"
+                  src="//clustrmaps.com/globe.js?d=REPLACE_WITH_YOUR_CLUSTRMAPS_CODE">
+                </script>
+              </div>
+            </div>
+            <div class="small text-muted mt-2">
+              Replace the code after you register your site on ClustrMaps.
             </div>
           </div>
-          <div class="col-6">
-            <div class="muted">GitHub</div>
-            <div style="font-weight:750;">
-              <a href="https://github.com/Reeshad-Khan" target="_blank" rel="noopener">github.com/Reeshad-Khan</a>
-            </div>
-          </div>
-          <div class="col-6">
-            <div class="muted">Google Scholar</div>
-            <div style="font-weight:750;">
-              <a href="https://scholar.google.com/citations?user=D3rO3W4AAAAJ" target="_blank" rel="noopener">Scholar profile</a>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="card-soft">
+            <div class="fw-semibold mb-2">Country Counter</div>
+            <a href="https://info.flagcounter.com/XXXX">
+              <img src="https://s01.flagcounter.com/count2/XXXX/bg_FFFFFF/txt_000000/border_CCCCCC/columns_4/maxflags_12/viewers_0/labels_1/pageviews_1/flags_0/percent_0/"
+                   alt="Flag Counter" style="max-width:100%; height:auto;">
+            </a>
+            <div class="small text-muted mt-2">
+              Replace XXXX with your FlagCounter ID.
             </div>
           </div>
         </div>
       </div>
     </section>
-
-    <footer>
-      <div class="divider"></div>
-      <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-top:14px;">
-        <div>© <span id="y"></span> Reeshad Khan</div>
-        <div class="faint">Built with plain HTML/CSS (GitHub Pages-friendly).</div>
-      </div>
-    </footer>
 
   </main>
 
-  <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
-  </script>
+  <footer class="footer">
+    <div class="container py-4 d-flex flex-wrap justify-content-between align-items-center gap-2">
+      <div class="small text-muted">© <span id="y"></span> {{ site.title }}</div>
+      <div class="small text-muted">Powered by GitHub Pages + Jekyll</div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/js/site.js"></script>
 </body>
 </html>

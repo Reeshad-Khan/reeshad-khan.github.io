@@ -1,0 +1,49 @@
+- key: tinybev
+  title: "TinyBEV: Cross-Modal Knowledge Distillation for Efficient Multi-Task BEV Perception and Planning"
+  venue: "ICCV Workshop (WDFM), 2025"
+  status: "Published"
+  authors: "Reeshad Khan et al."
+  year: 2025
+  tags: ["BEV", "EdgeAI", "Distillation"]
+  pdf: "/assets/papers/tinybev.pdf"
+  thumb: "/assets/img/papers/tinybev.png"
+
+- key: bayesian_pgure
+  title: "From Noise Estimation to Restoration: A Unified Diffusion and Bayesian Risk Approach for Unsupervised Denoising"
+  venue: "VISAPP, 2025"
+  status: "Published"
+  authors: "Reeshad Khan et al."
+  year: 2025
+  tags: ["Diffusion", "Unsupervised", "MRI"]
+  pdf: "/assets/papers/bayesian_pgure.pdf"
+  thumb: "/assets/img/papers/bayesian_pgure.png"
+
+- key: oversampling_ieee_access
+  title: "Learning From Oversampling: A Systematic Exploitation of Oversampling to Address Data Scarcity Issues in Deep Learning-Based MRI Reconstruction"
+  venue: "IEEE Access, 2024"
+  status: "Published"
+  authors: "Ibsa Kumara Jalata, Reeshad Khan, Ukash Nakarmi"
+  year: 2024
+  tags: ["MRI", "Reconstruction"]
+  pdf: "/assets/papers/oversampling_ieee_access.pdf"
+  thumb: "/assets/img/papers/oversampling_ieee_access.png"
+
+- key: sure_extensions_cvc
+  title: "Adaptive Extensions of Unbiased Risk Estimators for Unsupervised MRI Denoising"
+  venue: "Computer Vision Conference (CVC), 2026"
+  status: "Accepted"
+  authors: "Reeshad Khan, John Gauch, Ukash Nakarmi"
+  year: 2026
+  tags: ["SURE", "Unsupervised", "MRI"]
+  pdf: "/assets/papers/sure_extensions_cvc.pdf"
+  thumb: "/assets/img/papers/sure_extensions_cvc.png"
+
+- key: l2s_driving
+  title: "Learning to Sense for Driving: Joint Optics–Sensor–Model Co-Design for Semantic Segmentation"
+  venue: "CVPR, 2026"
+  status: "Under review"
+  authors: "Reeshad Khan, John Gauch"
+  year: 2026
+  tags: ["RAW-to-task", "Sensing", "Segmentation"]
+  pdf: "/assets/papers/l2s_driving.pdf"
+  thumb: "/assets/img/papers/l2s_driving.png"
