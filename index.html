@@ -181,36 +181,48 @@ layout: none
     <section id="visitors" class="section">
       <h2 class="h3 fw-bold">Visitors</h2>
       <p class="text-muted small mb-3">
-        World visitor map + country counts (uses a third-party counter widget).
+        World visitor map + country counts.
       </p>
-
+    
       <div class="row g-3">
+        <!-- Globe -->
         <div class="col-lg-6">
           <div class="card-soft">
             <div class="fw-semibold mb-2">World Map</div>
-            <div class="ratio ratio-16x9">
-              <div>
-                <script type="text/javascript" id="clstr_globe"
-                  src="//clustrmaps.com/globe.js?d=REPLACE_WITH_YOUR_CLUSTRMAPS_CODE">
+    
+            {% if site.clustrmaps_id and site.clustrmaps_id != "" %}
+              <div class="map-frame">
+                <script
+                  type="text/javascript"
+                  id="clstr_globe"
+                  src="//clustrmaps.com/globe.js?d={{ site.clustrmaps_id }}">
                 </script>
               </div>
-            </div>
-            <div class="small text-muted mt-2">
-              Replace the code after you register your site on ClustrMaps.
-            </div>
+            {% else %}
+              <div class="small text-muted">
+                (Visitor map will appear after you add your ClustrMaps ID in <code>_config.yml</code>.)
+              </div>
+            {% endif %}
           </div>
         </div>
-
+    
+        <!-- Country counter -->
         <div class="col-lg-6">
           <div class="card-soft">
             <div class="fw-semibold mb-2">Country Counter</div>
-            <a href="https://info.flagcounter.com/XXXX">
-              <img src="https://s01.flagcounter.com/count2/XXXX/bg_FFFFFF/txt_000000/border_CCCCCC/columns_4/maxflags_12/viewers_0/labels_1/pageviews_1/flags_0/percent_0/"
-                   alt="Flag Counter" style="max-width:100%; height:auto;">
-            </a>
-            <div class="small text-muted mt-2">
-              Replace XXXX with your FlagCounter ID.
-            </div>
+    
+            {% if site.flagcounter_id and site.flagcounter_id != "" %}
+              <a target="_blank" rel="noopener" href="https://info.flagcounter.com/{{ site.flagcounter_id }}">
+                <img
+                  src="https://s01.flagcounter.com/count2/{{ site.flagcounter_id }}/bg_FFFFFF/txt_000000/border_CCCCCC/columns_4/maxflags_12/viewers_0/labels_1/pageviews_1/flags_0/percent_0/"
+                  alt="Flag Counter"
+                  style="max-width:100%; height:auto;">
+              </a>
+            {% else %}
+              <div class="small text-muted">
+                (Country counter will appear after you add your FlagCounter ID in <code>_config.yml</code>.)
+              </div>
+            {% endif %}
           </div>
         </div>
       </div>
