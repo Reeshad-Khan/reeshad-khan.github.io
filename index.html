@@ -2,302 +2,627 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="description" content="Reeshad Khan — Efficient AI (EdgeAI) & Autonomous Systems Perception: BEV, radar–vision fusion, RAW-to-task co-design, real-time deployment." />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Reeshad Khan — Efficient AI & Autonomous Perception</title>
+
+  <title>Reeshad Khan — Computer Vision & Autonomous Systems</title>
+  <meta name="description" content="Reeshad Khan — Computer Vision & Autonomous Systems: Efficient BEV perception, radar–vision fusion, RAW-to-task co-design, real-time EdgeAI deployment." />
+
+  <!-- Optional: nicer system font stack -->
   <style>
-    /* Basic Reset */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      background-color: #f4f4f9;
-      color: #333;
+    :root{
+      --bg: #0b0f19;
+      --panel: rgba(255,255,255,0.06);
+      --panel-2: rgba(255,255,255,0.08);
+      --text: rgba(255,255,255,0.90);
+      --muted: rgba(255,255,255,0.70);
+      --faint: rgba(255,255,255,0.55);
+      --line: rgba(255,255,255,0.12);
+      --accent: #7aa2ff;
+      --accent-2: #6ee7ff;
+      --good: #34d399;
+
+      --maxw: 1050px;
+      --radius: 16px;
+      --shadow: 0 14px 40px rgba(0,0,0,0.35);
+
+      --h1: clamp(1.8rem, 3vw, 2.35rem);
+      --h2: clamp(1.25rem, 2vw, 1.5rem);
+      --h3: 1.02rem;
+      --p: 0.98rem;
+    }
+
+    /* Light mode (auto) */
+    @media (prefers-color-scheme: light) {
+      :root{
+        --bg:#f7f8fb;
+        --panel: rgba(0,0,0,0.04);
+        --panel-2: rgba(0,0,0,0.06);
+        --text: rgba(0,0,0,0.88);
+        --muted: rgba(0,0,0,0.62);
+        --faint: rgba(0,0,0,0.52);
+        --line: rgba(0,0,0,0.10);
+        --shadow: 0 16px 48px rgba(0,0,0,0.10);
+        --accent:#2f5cff;
+        --accent-2:#0096c7;
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 800px at 20% -10%, rgba(122,162,255,0.22), transparent 55%),
+                  radial-gradient(900px 600px at 90% 10%, rgba(110,231,255,0.18), transparent 55%),
+                  var(--bg);
+      color: var(--text);
       line-height: 1.6;
+    }
+
+    a{ color: var(--text); text-decoration: none; }
+    a:hover{ text-decoration: underline; text-decoration-color: rgba(122,162,255,0.55); }
+    .muted{ color: var(--muted); }
+    .faint{ color: var(--faint); }
+
+    .wrap{ width: min(var(--maxw), calc(100% - 40px)); margin: 0 auto; }
+
+    /* Top nav */
+    .nav{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom, rgba(10,14,24,0.75), rgba(10,14,24,0.35));
+      border-bottom: 1px solid var(--line);
+    }
+    @media (prefers-color-scheme: light) {
+      .nav{
+        background: linear-gradient(to bottom, rgba(247,248,251,0.85), rgba(247,248,251,0.55));
+      }
+    }
+    .nav-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 10px 0;
+      gap: 14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 0 3px rgba(122,162,255,0.18);
+    }
+    .nav-links{
+      display:flex; gap: 14px; flex-wrap: wrap; justify-content:flex-end;
+      font-size: 0.92rem;
+    }
+    .nav-links a{
+      padding: 8px 10px;
+      border-radius: 10px;
+      text-decoration:none;
+      color: var(--muted);
+    }
+    .nav-links a:hover{
+      background: var(--panel);
+      color: var(--text);
+      text-decoration:none;
+    }
+
+    /* Hero */
+    .hero{ padding: 42px 0 24px; }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+    @media (max-width: 900px){
+      .hero-grid{ grid-template-columns: 1fr; }
+    }
+    .hero-card{
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      overflow:hidden;
+      position: relative;
+    }
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background: radial-gradient(900px 260px at 10% 0%, rgba(122,162,255,0.22), transparent 55%),
+                  radial-gradient(700px 240px at 90% 10%, rgba(110,231,255,0.18), transparent 55%);
+      pointer-events:none;
+      opacity:0.9;
+    }
+    .hero-card > *{ position: relative; }
+
+    h1{
+      margin: 0 0 6px;
+      font-size: var(--h1);
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+    }
+    .subtitle{
+      margin: 0 0 14px;
+      font-size: 1.03rem;
+      color: var(--muted);
+    }
+
+    .chips{ display:flex; flex-wrap:wrap; gap: 8px; margin: 14px 0 6px; }
+    .chip{
+      font-size: 0.88rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.05);
+      color: var(--muted);
+    }
+    @media (prefers-color-scheme: light){
+      .chip{ background: rgba(0,0,0,0.03); }
+    }
+
+    .cta{ display:flex; flex-wrap:wrap; gap: 10px; margin-top: 14px; }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      font-weight: 650;
+      font-size: 0.95rem;
+      text-decoration:none;
+    }
+    .btn:hover{ text-decoration:none; background: rgba(255,255,255,0.10); }
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(122,162,255,0.92), rgba(110,231,255,0.72));
+      border-color: rgba(255,255,255,0.14);
+      color: rgba(0,0,0,0.85);
+    }
+    .btn.primary:hover{ filter: brightness(1.02); }
+
+    /* Profile card */
+    .profile{
+      display:flex; flex-direction:column; gap: 12px;
+    }
+    .profile-top{
+      display:flex; gap: 14px; align-items:center;
+    }
+    .avatar{
+      width: 84px; height: 84px;
+      border-radius: 18px;
+      object-fit: cover;
+      border: 1px solid var(--line);
+      background: var(--panel-2);
+    }
+    .profile small{ color: var(--muted); }
+    .kv{
+      display:grid;
+      gap: 8px;
+      margin-top: 6px;
+      font-size: 0.95rem;
+    }
+    .kv a{ color: var(--text); }
+    .kv .row{
+      display:flex; gap: 10px; align-items:flex-start;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.05);
+    }
+    @media (prefers-color-scheme: light){
+      .kv .row{ background: rgba(0,0,0,0.03); }
+    }
+    .kv .label{
+      min-width: 70px;
+      color: var(--muted);
+      font-weight: 650;
+    }
+
+    /* Sections */
+    section{ padding: 22px 0; }
+    .sec-head{
+      display:flex; align-items:baseline; justify-content:space-between; gap: 14px; margin-bottom: 12px;
+    }
+    h2{
       margin: 0;
-      padding-bottom: 80px; /* space for footer */
+      font-size: var(--h2);
+      letter-spacing: -0.01em;
     }
-    header {
-      background: #0056b3;
-      color: #fff;
-      padding: 40px 20px;
-      text-align: center;
-    }
-    header h1 { margin-bottom: 10px; font-size: 2.2rem; font-weight: 600; }
-    header p { font-size: 1.1rem; margin-bottom: 10px; }
+    .divider{ border-top: 1px solid var(--line); margin-top: 18px; }
 
-    /* Nav */
-    nav { background-color: #333; overflow: hidden; }
-    nav ul {
-      list-style-type: none; display: flex; justify-content: center; padding: 0;
+    /* Cards / grids */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
     }
-    nav ul li { margin: 0 15px; }
-    nav a {
-      display: block; padding: 14px 20px; color: #fff; text-decoration: none; font-weight: 500;
+    .col-12{ grid-column: span 12; }
+    .col-6{ grid-column: span 6; }
+    .col-4{ grid-column: span 4; }
+    @media (max-width: 900px){
+      .col-6,.col-4{ grid-column: span 12; }
     }
-    nav a:hover { background-color: #444; transition: 0.3s; }
 
-    /* Layout */
-    main { max-width: 1100px; margin: 20px auto; padding: 0 20px; }
-    section { margin: 30px 0; }
-    section h2 { font-size: 1.8rem; margin-bottom: 10px; color: #0056b3; }
-    section h3 { font-size: 1.2rem; margin: 10px 0 6px; }
-    section p, section ul, section ol { font-size: 1rem; margin-bottom: 12px; }
-    ul { margin-left: 20px; list-style-type: disc; }
-    ol { margin-left: 20px; list-style-type: decimal; }
+    .card{
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.20);
+    }
+    .card h3{
+      margin: 0 0 6px;
+      font-size: var(--h3);
+      letter-spacing: -0.01em;
+    }
+    .meta{
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .bullets{ margin: 0; padding-left: 18px; color: var(--muted); }
+    .bullets li{ margin: 6px 0; }
 
-    /* About Section Layout */
-    .about-container {
-      display: flex;
-      align-items: flex-start;
-      gap: 20px;
+    .tagrow{ display:flex; flex-wrap:wrap; gap: 8px; margin-top: 10px; }
+    .tag{
+      font-size: 0.82rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      background: rgba(255,255,255,0.05);
     }
-    .profile-photo {
-      max-width: 180px;
-      border-radius: 10%;
-      margin: 0;
-      box-shadow: 0 0 6px rgba(0,0,0,0.1);
+    @media (prefers-color-scheme: light){
+      .tag{ background: rgba(0,0,0,0.03); }
     }
-    .about-text { flex: 1; }
 
-    .pill {
-      display: inline-block; padding: 6px 10px; margin: 6px 6px 0 0;
-      background:#e8f1fb; color:#0056b3; border-radius:999px; font-size: 0.9rem; border:1px solid #c9defa;
+    .links{
+      margin-top: 10px;
+      display:flex; flex-wrap:wrap; gap: 10px;
+      font-size: 0.95rem;
     }
-    .card {
-      background: #fff; border-radius: 12px; padding: 16px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.06); margin: 14px 0;
+    .links a{
+      color: var(--accent);
+      font-weight: 650;
+      text-decoration:none;
     }
-    .grid {
-      display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px;
-    }
-    .col-12 { grid-column: span 12; }
-    .col-6 { grid-column: span 6; }
-    .col-4 { grid-column: span 4; }
+    .links a:hover{ text-decoration: underline; }
 
-    .btn {
-      display:inline-block; padding:10px 14px; background:#0056b3; color:#fff; border-radius:6px; text-decoration:none; font-weight:600;
-    }
-    .btn.outline { background:#fff; color:#0056b3; border:1px solid #0056b3; }
+    /* Publications list */
+    .pubs{ margin:0; padding-left: 18px; }
+    .pubs li{ margin: 10px 0; color: var(--muted); }
+    .pubs b{ color: var(--text); }
 
-    footer {
-      width: 100%; background-color: #333; color: #fff;
-      position: fixed; bottom: 0; left: 0; padding: 15px 0; text-align: center;
-    }
-    footer p { margin: 0; font-size: 0.9rem; }
-    a { color: #0056b3; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    /* Responsive */
-    @media (max-width: 900px) {
-      .col-6, .col-4 { grid-column: span 12; }
-    }
-    @media (max-width: 768px) {
-      header h1 { font-size: 1.8rem; }
-      nav ul { flex-direction: column; }
-      nav ul li { margin: 5px 0; }
-      .about-container { flex-direction: column; align-items: center; text-align: center; }
-      .about-text { text-align: left; }
+    /* Footer */
+    footer{
+      padding: 26px 0 34px;
+      color: var(--faint);
+      font-size: 0.92rem;
     }
   </style>
 </head>
+
 <body>
-  <!-- Header -->
-  <header>
-    <h1>Reeshad Khan</h1>
-    <p>Efficient AI (EdgeAI) & Autonomous Systems Perception — BEV • Radar–Vision Fusion • RAW-to-Task Co-Design</p>
-    <p>
-      <a class="btn" href="https://github.com/Reeshad-Khan" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn outline" href="https://scholar.google.com/citations?user=D3rO3W4AAAAJ" target="_blank" rel="noopener">Google Scholar</a>
-    </p>
+
+  <!-- NAV -->
+  <div class="nav">
+    <div class="wrap nav-inner">
+      <div class="brand"><span class="dot"></span> Reeshad Khan</div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#focus">Focus</a>
+        <a href="#projects">Projects</a>
+        <a href="#publications">Publications</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="wrap hero-grid">
+
+      <div class="hero-card">
+        <h1>Computer Vision & Autonomous Systems</h1>
+        <p class="subtitle">
+          Efficient BEV perception • Radar–Vision fusion • RAW-to-task co-design • Real-time EdgeAI deployment
+        </p>
+
+        <div class="chips">
+          <span class="chip">BEV Perception & Planning</span>
+          <span class="chip">Multisensor Fusion</span>
+          <span class="chip">Robustness in adverse conditions</span>
+          <span class="chip">TensorRT / ONNX / Profiling</span>
+        </div>
+
+        <div class="cta">
+          <a class="btn primary" href="Resume_of_Reeshad_Khan.pdf" target="_blank" rel="noopener">Download Resume (PDF)</a>
+          <a class="btn" href="Reeshad%20Khan_CV.pdf" target="_blank" rel="noopener">CV (PDF)</a>
+          <a class="btn" href="https://scholar.google.com/citations?user=D3rO3W4AAAAJ" target="_blank" rel="noopener">Google Scholar</a>
+          <a class="btn" href="https://github.com/Reeshad-Khan" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href="https://www.linkedin.com/in/reeshad-khan-a50207106/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+
+        <div class="divider"></div>
+        <p class="muted" style="margin:14px 0 0;">
+          I build <b>deployment-minded</b> perception systems for autonomy: reliable outputs under noise,
+          tight batch-1 latency, and realistic evaluation (closed-loop where possible).
+        </p>
+      </div>
+
+      <div class="hero-card profile">
+        <div class="profile-top">
+          <img class="avatar" src="profile.jpg" alt="Reeshad Khan profile photo" />
+          <div>
+            <div style="font-weight:800; font-size:1.05rem;">Reeshad Khan, Ph.D.</div>
+            <small>Fayetteville, AR, USA</small><br/>
+            <small class="muted">Open to Research Scientist / Perception roles</small>
+          </div>
+        </div>
+
+        <div class="kv">
+          <div class="row">
+            <div class="label">Email</div>
+            <div><a href="mailto:rk010@uark.edu">rk010@uark.edu</a></div>
+          </div>
+          <div class="row">
+            <div class="label">Phone</div>
+            <div class="muted">+1 (479) 502-7320</div>
+          </div>
+          <div class="row">
+            <div class="label">Areas</div>
+            <div class="muted">BEV • Fusion • Robust sensing • Edge deployment</div>
+          </div>
+        </div>
+
+        <div class="tagrow" aria-label="Quick tags">
+          <span class="tag">Real-time</span>
+          <span class="tag">Robustness</span>
+          <span class="tag">Systems-aware ML</span>
+          <span class="tag">Autonomy stack</span>
+        </div>
+      </div>
+
+    </div>
   </header>
 
-  <!-- Nav -->
-  <nav>
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#focus">Research Focus</a></li>
-      <li><a href="#projects">Flagship Projects</a></li>
-      <li><a href="#publications">Publications</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+  <main class="wrap">
 
-  <!-- Main -->
-  <main>
-    <!-- About -->
+    <!-- ABOUT -->
     <section id="about">
-      <h2>About Me</h2>
-      <div class="about-container">
-        <img src="profile.jpg" alt="Profile Photo" class="profile-photo" />
-        <div class="about-text">
-          <p class="card">
-            I build <strong>efficient perception systems</strong> for autonomy that run <strong>real-time on edge hardware</strong>.
-            My work spans <strong>camera-only BEV</strong> (TinyBEV), <strong>radar–vision fusion</strong> for adverse weather,
-            <strong>sensor–optics–model co-design</strong> (RAW-to-task) for robustness, and <strong>evaluation frameworks</strong>
-            for 3D reconstruction (4DCF). I care about <em>latency, reliability, and deployment</em>—profiling, pruning,
-            quantization, TensorRT, and mixed precision to hit FPS targets without sacrificing safety.
-          </p>
-          <div>
-            <span class="pill">Real-Time BEV</span>
-            <span class="pill">EdgeAI</span>
-            <span class="pill">Radar–Vision Fusion</span>
-            <span class="pill">RAW-to-Task Co-Design</span>
-            <span class="pill">Embedded Deployment</span>
-            <span class="pill">3D Perception</span>
+      <div class="sec-head">
+        <h2>About</h2>
+        <div class="faint">Short, direct, and skimmable.</div>
+      </div>
+
+      <div class="card">
+        <p style="margin:0; font-size:var(--p);">
+          I design <b>efficient perception-to-planning</b> systems for autonomous platforms, with a focus on
+          <b>BEV representations</b>, <b>radar–vision fusion</b> for adverse conditions, and <b>sensor/optics/model co-design</b>
+          (RAW-to-task). I care about what happens after training: exportability, profiling, quantization,
+          and hitting <b>batch-1 latency</b> targets without fragile behavior.
+        </p>
+      </div>
+    </section>
+
+    <!-- FOCUS -->
+    <section id="focus">
+      <div class="sec-head">
+        <h2>Research Focus</h2>
+        <div class="faint">What you want people to remember.</div>
+      </div>
+
+      <div class="grid">
+        <div class="col-6 card">
+          <h3>Efficient AI / EdgeAI</h3>
+          <div class="meta">Compression, inference optimization, and deployability.</div>
+          <ul class="bullets">
+            <li>Pruning/quantization, AMP, ONNX export, TensorRT benchmarking</li>
+            <li>Profiling: kernel hotspots, memory pressure, batch-1 latency</li>
+            <li>Accuracy–latency Pareto mindset</li>
+          </ul>
+        </div>
+
+        <div class="col-6 card">
+          <h3>Autonomous Perception</h3>
+          <div class="meta">BEV + fusion + robustness under real sensing constraints.</div>
+          <ul class="bullets">
+            <li>Camera-only BEV perception (detection/mapping/forecasting/planning)</li>
+            <li>Radar–vision fusion for fog/rain/low-light</li>
+            <li>Sensor–optics co-design (RAW-to-task) for robust semantics</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="sec-head">
+        <h2>Flagship Projects</h2>
+        <div class="faint">Pick 3–5. Keep them punchy.</div>
+      </div>
+
+      <div class="grid">
+        <div class="col-12 card">
+          <h3>TinyBEV — Cross-Modal Distillation for Camera-Only BEV (ICCV 2025 WDFM)</h3>
+          <div class="meta">Full-stack BEV (detection/mapping/forecasting/planning) distilled into a compact, real-time student.</div>
+          <ul class="bullets">
+            <li>Multi-stage distillation across features + outputs + region-aware supervision</li>
+            <li>Designed for deployment realism: runtime/memory tradeoffs and reproducible eval</li>
+          </ul>
+          <div class="links">
+            <a href="#" aria-disabled="true" title="Add your PDF link">Paper (soon)</a>
+            <a href="https://github.com/Reeshad-Khan" target="_blank" rel="noopener">Code</a>
+          </div>
+          <div class="tagrow">
+            <span class="tag">BEV</span><span class="tag">Distillation</span><span class="tag">Real-time</span><span class="tag">Autonomy stack</span>
+          </div>
+        </div>
+
+        <div class="col-12 card">
+          <h3>Learning to Sense for Driving — RAW-to-Task Optics–Sensor–Model Co-Design (under review)</h3>
+          <div class="meta">Differentiable sensing pipeline: optics + noise + quantization co-optimized with a compact segmentation head.</div>
+          <ul class="bullets">
+            <li>Robust semantics under low-light / blur / reduced bit-depth</li>
+            <li>Ablations + Pareto analysis for deployment-grade decisions</li>
+          </ul>
+          <div class="links">
+            <a href="#" aria-disabled="true" title="Add your arXiv link">Preprint (under review)</a>
+          </div>
+          <div class="tagrow">
+            <span class="tag">RAW-to-task</span><span class="tag">Robustness</span><span class="tag">Quantization</span><span class="tag">EdgeAI</span>
+          </div>
+        </div>
+
+        <div class="col-12 card">
+          <h3>Radar–Vision Fusion for Adverse Conditions (WACV 2026 project)</h3>
+          <div class="meta">Modular fusion (early/late/attention) targeting real-time and ablation-friendly design.</div>
+          <ul class="bullets">
+            <li>Reliability-aware fusion for rain/fog/low-light</li>
+            <li>Visualization + metrics tracking with safety-critical evaluation hooks</li>
+          </ul>
+          <div class="links">
+            <a href="#" aria-disabled="true" title="Add your link">Tech report (in prep)</a>
+          </div>
+          <div class="tagrow">
+            <span class="tag">Radar</span><span class="tag">Fusion</span><span class="tag">Adverse weather</span><span class="tag">nuScenes</span>
+          </div>
+        </div>
+
+        <div class="col-12 card">
+          <h3>4DCF — Robustness Evaluation for 3D Reconstruction (under review)</h3>
+          <div class="meta">A robustness suite that exposes failure modes beyond a single metric.</div>
+          <ul class="bullets">
+            <li>Diagnostics: spatial smoothness, scale stability, perturbation robustness, temporal consistency</li>
+          </ul>
+          <div class="links">
+            <a href="#" aria-disabled="true" title="Add your PDF link">Preprint</a>
+          </div>
+          <div class="tagrow">
+            <span class="tag">Evaluation</span><span class="tag">3D</span><span class="tag">Robustness</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="muted" style="margin-top:12px;">
+        Earlier work: unsupervised MRI denoising/reconstruction (VISAPP 2025; IEEE Access) — now mainly used as technique background.
+      </p>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section id="publications">
+      <div class="sec-head">
+        <h2>Selected Publications</h2>
+        <div class="faint">Keep it curated + link to Scholar.</div>
+      </div>
+
+      <div class="card">
+        <ol class="pubs">
+          <li><b>TinyBEV</b>: Cross-Modal Knowledge Distillation for Efficient Multi-Task BEV Perception and Planning. <i>ICCV WDFM</i>, 2025.</li>
+          <li><b>Learning to Sense for Driving</b>: Joint Optics–Sensor–Model Co-Design for Semantic Segmentation. <i>Under review</i>.</li>
+          <li><b>4DCF</b>: Robust Evaluation of 3D Scene Reconstruction. <i>Under review</i>.</li>
+          <li><b>From Noise Estimation to Restoration</b>. <i>VISAPP</i>, 2025.</li>
+          <li><b>Learning from Oversampling for MRI Reconstruction</b>. <i>IEEE Access</i>, 2024.</li>
+        </ol>
+
+        <div class="links">
+          <a href="https://scholar.google.com/citations?user=D3rO3W4AAAAJ" target="_blank" rel="noopener">Full list on Google Scholar →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="sec-head">
+        <h2>Skills</h2>
+        <div class="faint">Keyword-friendly for recruiters.</div>
+      </div>
+
+      <div class="grid">
+        <div class="col-4 card">
+          <h3>Perception</h3>
+          <ul class="bullets">
+            <li>Detection, segmentation, panoptic, BEV</li>
+            <li>3D reconstruction & evaluation</li>
+          </ul>
+        </div>
+
+        <div class="col-4 card">
+          <h3>EdgeAI</h3>
+          <ul class="bullets">
+            <li>Pruning, quantization, AMP</li>
+            <li>ONNX, TensorRT, profiling</li>
+          </ul>
+        </div>
+
+        <div class="col-4 card">
+          <h3>Stacks</h3>
+          <ul class="bullets">
+            <li>PyTorch, TensorFlow, OpenCV</li>
+            <li>CUDA, Docker, CI/CD, HPC</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="sec-head">
+        <h2>Contact</h2>
+        <div class="faint">Make it effortless.</div>
+      </div>
+
+      <div class="card">
+        <div class="grid" style="gap:10px;">
+          <div class="col-6">
+            <div class="muted">Email</div>
+            <div style="font-weight:750;"><a href="mailto:rk010@uark.edu">rk010@uark.edu</a></div>
+          </div>
+          <div class="col-6">
+            <div class="muted">LinkedIn</div>
+            <div style="font-weight:750;">
+              <a href="https://www.linkedin.com/in/reeshad-khan-a50207106/" target="_blank" rel="noopener">linkedin.com/in/reeshad-khan-a50207106</a>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="muted">GitHub</div>
+            <div style="font-weight:750;">
+              <a href="https://github.com/Reeshad-Khan" target="_blank" rel="noopener">github.com/Reeshad-Khan</a>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="muted">Google Scholar</div>
+            <div style="font-weight:750;">
+              <a href="https://scholar.google.com/citations?user=D3rO3W4AAAAJ" target="_blank" rel="noopener">Scholar profile</a>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Research Focus -->
-    <section id="focus">
-      <h2>Research Focus</h2>
-      <div class="grid">
-        <div class="col-6 card">
-          <h3>Efficient AI / EdgeAI</h3>
-          <ul>
-            <li>Model compression (pruning, quantization), TensorRT, AMP</li>
-            <li>Throughput-driven design for NVIDIA Orin/Jetson, RTX/Datacenter GPUs</li>
-            <li>Profiling: kernel hotspots, memory scheduling, batch-1 latency</li>
-          </ul>
-        </div>
-        <div class="col-6 card">
-          <h3>Autonomous Perception</h3>
-          <ul>
-            <li>Camera-only <strong>BEV</strong> perception (detection, mapping, forecasting, planning)</li>
-            <li><strong>Radar–Vision fusion</strong> for fog/rain/low-light robustness</li>
-            <li><strong>Sensor–optics co-design</strong> (RAW-to-task) for semantics under noise/quantization</li>
-          </ul>
-        </div>
+    <footer>
+      <div class="divider"></div>
+      <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-top:14px;">
+        <div>© <span id="y"></span> Reeshad Khan</div>
+        <div class="faint">Built with plain HTML/CSS (GitHub Pages-friendly).</div>
       </div>
-    </section>
+    </footer>
 
-    <!-- Projects -->
-    <section id="projects">
-      <h2>Flagship Projects</h2>
-
-      <article class="card">
-        <h3>TinyBEV — Cross-Modal Distillation for Camera-Only BEV (ICCV 2025 WDFM)</h3>
-        <p>
-          Lightweight BEV model distilled from UniAD for <strong>real-time, camera-only</strong> multi-task autonomy:
-          detection, mapping, forecasting, and planning. Designed for <strong>embedded deployment</strong> (EdgeAI).
-        </p>
-        <ul>
-          <li>Knowledge distillation to compress multi-modal teacher → compact student</li>
-          <li>Latency-aware training; on-device optimizations to meet FPS targets</li>
-        </ul>
-        <p><a href="#" aria-disabled="true">Paper (soon)</a> · <a href="https://github.com/Reeshad-Khan" target="_blank" rel="noopener">Code & demos</a></p>
-      </article>
-
-      <article class="card">
-        <h3>Learning to Sense for Driving — RAW-to-Task Optics–Sensor–Model Co-Design (WACV 2026 under review)</h3>
-        <p>
-          End-to-end <strong>co-design</strong> of cellphone-scale optics, learnable CFA, Poisson–Gaussian noise, and
-          quantization with a compact segmentation head. Improves mIoU and boundary accuracy under low-light,
-          blur, and reduced bit-depth—<strong>robust semantics with deployment-grade runtime</strong>.
-        </p>
-        <ul>
-          <li>Exposure control + differentiable optics; straight-through quantization</li>
-          <li>Mixed precision, ablations, and Pareto (accuracy vs. latency) analysis</li>
-        </ul>
-        <p><a href="#" aria-disabled="true">Preprint (under review)</a></p>
-      </article>
-
-      <article class="card">
-        <h3>Radar–Vision Fusion for Adverse Conditions (WACV 2026 project)</h3>
-        <p>
-          Modular fusion (early/late/attention) to maintain perception quality in rain, fog, and low light.
-          Targets <strong>real-time inference</strong> and <strong>embedded deployment</strong> with ablation-ready components.
-        </p>
-        <ul>
-          <li>nuScenes-based pipelines; attention-weighted sensor reliability</li>
-          <li>Profiling, visualization, and safety-critical metrics tracking</li>
-        </ul>
-        <p><a href="#" aria-disabled="true">Tech report (in prep)</a></p>
-      </article>
-
-      <article class="card">
-        <h3>4DCF — Robustness Evaluation for 3D Reconstruction (ISVC 2025 under review)</h3>
-        <p>
-          A unified robustness suite for 3D reconstruction: <strong>Spatial Smoothness</strong>, <strong>Scale Stability</strong>,
-          <strong>Perturbation Robustness</strong>, and <strong>Temporal Consistency</strong>, with radar-chart diagnostics to
-          expose failure modes beyond Chamfer/PSNR.
-        </p>
-        <p><a href="#" aria-disabled="true">Preprint (under review)</a></p>
-      </article>
-
-      <article class="card">
-        <h3>Semantic Scene Understanding for Autonomous Systems</h3>
-        <p>
-          Real-time panoptic perception and 3D reconstruction across diverse environments with deployment-minded
-          training (mixed precision, memory optimization, structured pruning).
-        </p>
-      </article>
-
-      <p style="margin-top:8px; color:#555;">
-        <em>Earlier work:</em> unsupervised MRI denoising and reconstruction (VISAPP 2025; IEEE Access)—useful for
-        technique development, but current focus is autonomy & EdgeAI.
-      </p>
-    </section>
-
-    <!-- Publications -->
-    <section id="publications">
-      <h2>Selected Publications</h2>
-      <ol class="card">
-        <li><strong>TinyBEV</strong>: Cross-Modal Knowledge Distillation for Efficient Multi-Task BEV Perception and Planning. <em>ICCV WDFM Workshop</em>, 2025.</li>
-        <li><strong>Learning to Sense for Driving</strong>: Joint Optics–Sensor–Model Co-Design for Semantic Segmentation. <em>WACV 2026</em>, under review.</li>
-        <li><strong>4DCF</strong>: A 4D Consistency Field for Robust Evaluation of 3D Scene Reconstruction. <em>ISVC 2025</em>, under review.</li>
-        <li><strong>From Noise Estimation to Restoration</strong>. <em>VISAPP 2025</em>.</li>
-        <li><strong>Learning from Oversampling for MRI Reconstruction</strong>. <em>IEEE Access</em>, 2024.</li>
-      </ol>
-      <p>
-        Full list on <a href="https://scholar.google.com/citations?user=D3rO3W4AAAAJ" target="_blank" rel="noopener">Google Scholar</a>.
-      </p>
-    </section>
-
-    <!-- Skills -->
-    <section id="skills">
-      <h2>Skills</h2>
-      <div class="grid">
-        <div class="col-4 card">
-          <h3>Perception</h3>
-          <ul>
-            <li>Detection, segmentation, panoptic, BEV</li>
-            <li>3D reconstruction & evaluation (4DCF)</li>
-          </ul>
-        </div>
-        <div class="col-4 card">
-          <h3>EdgeAI</h3>
-          <ul>
-            <li>Pruning, quantization, TensorRT, AMP</li>
-            <li>Kernel/memory profiling, batch-1 latency</li>
-          </ul>
-        </div>
-        <div class="col-4 card">
-          <h3>Stacks & Tools</h3>
-          <ul>
-            <li>PyTorch, TensorFlow, Detectron2, OpenCV</li>
-            <li>CUDA, Docker, CI/CD, HPC clusters</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact">
-      <h2>Contact</h2>
-      <p class="card">
-        <strong>Email:</strong> <a href="mailto:rk010@uark.edu">rk010@uark.edu</a><br />
-        <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/reeshad-khan-a50207106/" target="_blank" rel="noopener">linkedin.com/in/reeshad-khan-a50207106</a><br />
-        <strong>GitHub:</strong> <a href="https://github.com/Reeshad-Khan" target="_blank" rel="noopener">github.com/Reeshad-Khan</a>
-      </p>
-    </section>
   </main>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; <script>document.write(new Date().getFullYear());</script> Reeshad Khan — Efficient AI & Autonomous Perception</p>
-  </footer>
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
