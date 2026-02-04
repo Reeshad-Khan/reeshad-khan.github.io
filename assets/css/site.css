@@ -1,3 +1,4 @@
+/* Base */
 :root{
   --ink:#111827;
   --muted:#6b7280;
@@ -7,23 +8,38 @@
   --brand:#0b5ed7;
 }
 
-body{ color:var(--ink); background:var(--bg); }
+*{ box-sizing: border-box; }
 
+body{
+  margin: 0;
+  color: var(--ink);
+  background: var(--bg);
+}
+
+a{ color: var(--brand); }
+a:hover{ color: #084bb3; }
+
+/* Hero */
 .hero{
   background: linear-gradient(180deg, #f8fafc, #ffffff);
   border-bottom: 1px solid var(--border);
 }
 
 .profile{
-  width: 220px;
-  height: 220px;
+  width: 260px;            /* bigger */
+  height: 260px;           /* bigger */
   object-fit: cover;
-  border-radius: 20px;
+  border-radius: 22px;
   border: 1px solid var(--border);
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
-.section{ padding-top: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--border); }
+/* Sections / cards */
+.section{
+  padding-top: 28px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+}
 .section:last-child{ border-bottom: none; }
 
 .card-soft{
@@ -33,6 +49,7 @@ body{ color:var(--ink); background:var(--bg); }
   padding: 16px;
 }
 
+/* Pills */
 .pill-row .pill{
   display:inline-block;
   padding: 6px 10px;
@@ -44,6 +61,7 @@ body{ color:var(--ink); background:var(--bg); }
   margin: 4px 6px 0 0;
 }
 
+/* Timeline */
 .timeline{
   display:flex;
   flex-direction:column;
@@ -62,15 +80,20 @@ body{ color:var(--ink); background:var(--bg); }
 }
 
 .timeline-date{ font-size: 0.9rem; color: var(--muted); }
+
 .timeline-dot{
-  width: 36px; height: 36px;
+  width: 36px;
+  height: 36px;
   border-radius: 12px;
   background: var(--soft);
   border: 1px solid var(--border);
-  display:flex; align-items:center; justify-content:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   font-size: 18px;
 }
 
+/* Publications */
 .pub-card{
   display:grid;
   grid-template-columns: 1fr 180px;
@@ -81,7 +104,10 @@ body{ color:var(--ink); background:var(--bg); }
   background: #fff;
 }
 
-.pub-title{ color: var(--ink); text-decoration: none; }
+.pub-title{
+  color: var(--ink);
+  text-decoration: none;
+}
 .pub-title:hover{ text-decoration: underline; }
 
 .pub-status{
@@ -114,31 +140,48 @@ body{ color:var(--ink); background:var(--bg); }
   background: var(--soft);
 }
 
+/* Footer */
 .footer{
   border-top: 1px solid var(--border);
   background: #fff;
 }
 
-@media (max-width: 768px){
-  .pub-card{ grid-template-columns: 1fr; }
-  .pub-thumb img{ height: 160px; }
-  .timeline-item{ grid-template-columns: 90px 44px 1fr; }
-}
-
-/* Keep ClustrMaps globe inside the card */
+/* ✅ Visitors: keep ClustrMaps globe INSIDE card */
 .map-frame{
   width: 100%;
-  height: 320px;        /* adjust if you want bigger */
-  overflow: hidden;     /* prevents the globe from spilling out */
+  height: 320px;
+  overflow: hidden;            /* key containment */
   border-radius: 14px;
   border: 1px solid var(--border);
   background: #fff;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* ClustrMaps sometimes injects inline sizes; help it behave */
+/*
+  IMPORTANT:
+  Don’t apply generic `div{max-width:100%}` here — ClustrMaps uses nested divs.
+  Instead, only constrain common injected render targets.
+*/
 .map-frame canvas,
 .map-frame iframe,
-.map-frame div{
+.map-frame svg{
   max-width: 100% !important;
+  max-height: 100% !important;
+}
+
+/* If ClustrMaps injects an absolutely-positioned container, pin it */
+.map-frame > div{
+  position: absolute !important;
+  inset: 0 !important;
+}
+
+/* Responsive */
+@media (max-width: 768px){
+  .pub-card{ grid-template-columns: 1fr; }
+  .pub-thumb img{ height: 160px; }
+  .timeline-item{ grid-template-columns: 90px 44px 1fr; }
+  .profile{ width: 220px; height: 220px; }  /* keep it reasonable on phones */
 }
