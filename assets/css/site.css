@@ -168,11 +168,6 @@ a:hover{ color: #084bb3; }
   display: block !important;
 }
 
-/* If ClustrMaps injects an absolutely-positioned container, pin it */
-.map-frame > div{
-  position: absolute !important;
-  inset: 0 !important;
-}
 
 /* Responsive */
 @media (max-width: 768px){
