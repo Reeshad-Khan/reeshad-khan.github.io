@@ -275,6 +275,12 @@ layout: none
     })();
   </script>
   {% endif %}
+  <script>
+  // Force MapMyVisitors to reflow after layout settles (fixes blank globe on wide screens)
+  window.addEventListener("load", () => {
+    setTimeout(() => window.dispatchEvent(new Event("resize")), 500);
+  });
+</script>
   
 </body>
 </html>
