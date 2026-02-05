@@ -156,7 +156,7 @@ a:hover{ color: #084bb3; }
   background: #fff;
   position: relative;
 }
-
+#mmvst_container { width: 100%; height: 100%; }
 /* Ensure injected content fills the frame */
 .map-frame iframe,
 .map-frame canvas,
