@@ -191,7 +191,9 @@ layout: none
     
             {% if site.mapmyvisitors_id %}
               <div class="map-frame">
-                <div id="mmvst_container"></div>
+                <div id="mmvst_container">
+                  <script type="text/javascript" src="https://mapmyvisitors.com/globe.js?d={{ site.mapmyvisitors_id }}"></script>
+                </div>
               </div>
             {% else %}
               <div class="small text-muted">
@@ -236,65 +238,6 @@ layout: none
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="/assets/js/site.js"></script>
-{% if site.mapmyvisitors_id %}
-<script>
-(function () {
-  const MMV_URL = "https://mapmyvisitors.com/globe.js?d={{ site.mapmyvisitors_id }}";
-  const CONTAINER_ID = "mmvst_container";
-
-  function waitForNonZeroSize(el, cb) {
-    let tries = 0;
-    (function tick() {
-      const w = el.clientWidth || 0;
-      const h = el.clientHeight || 0;
-      if (w > 50 && h > 50) return cb();
-      if (++tries > 120) return; // ~2s max (120 * 16ms)
-      requestAnimationFrame(tick);
-    })();
-  }
-
-  function loadMMV() {
-    const container = document.getElementById(CONTAINER_ID);
-    if (!container) return;
-
-    // Remove any previous script we injected
-    const old = container.querySelector("script#mmvst_globe");
-    if (old) old.remove();
-
-    // Clear only the injected widget (safe)
-    container.innerHTML = "";
-
-    const s = document.createElement("script");
-    s.type = "text/javascript";
-    s.id = "mmvst_globe";
-    s.src = MMV_URL;
-
-    // IMPORTANT: inject script into the container so the widget renders inside it
-    container.appendChild(s);
-  }
-
-  window.addEventListener("load", function () {
-    const container = document.getElementById(CONTAINER_ID);
-    if (!container) return;
-
-    waitForNonZeroSize(container, loadMMV);
-  });
-
-  // On resize: if it goes blank, reload once (debounced)
-  let t = null;
-  window.addEventListener("resize", function () {
-    clearTimeout(t);
-    t = setTimeout(() => {
-      const container = document.getElementById(CONTAINER_ID);
-      if (!container) return;
-
-      // If the widget content is missing, reload
-      if (!container.querySelector("canvas, iframe, svg")) loadMMV();
-    }, 350);
-  });
-})();
-</script>
-{% endif %}
   
 </body>
 </html>
