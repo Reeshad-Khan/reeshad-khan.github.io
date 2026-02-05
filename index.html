@@ -177,44 +177,42 @@ layout: none
         <div><span class="fw-semibold">GitHub:</span> <a target="_blank" rel="noopener" href="https://github.com/Reeshad-Khan">github.com/Reeshad-Khan</a></div>
       </div>
     </section>
-
+    
     <section id="visitors" class="section">
       <h2 class="h3 fw-bold">Visitors</h2>
-      <p class="text-muted small mb-3">
-        World visitor map + country counts.
-      </p>
+      <p class="text-muted small mb-3">World visitor map + country counts.</p>
     
       <div class="row g-3">
-        <!-- Globe -->
+    
+        <!-- Globe (MapMyVisitors) -->
         <div class="col-lg-6">
           <div class="card-soft">
             <div class="fw-semibold mb-2">World Map</div>
     
-            {% if site.clustrmaps_id and site.clustrmaps_id != "" %}
+            {% if site.mapmyvisitors_id %}
               <div class="map-frame">
-                <script
-                  type="text/javascript"
-                  id="clstr_globe"
-                  src="https://clustrmaps.com/globe.js?d={{ site.clustrmaps_id }}">
+                <script type="text/javascript" id="mmvst_globe"
+                  src="https://mapmyvisitors.com/globe.js?d={{ site.mapmyvisitors_id }}">
                 </script>
               </div>
             {% else %}
               <div class="small text-muted">
-                (Visitor map will appear after you add your ClustrMaps ID in <code>_config.yml</code>.)
+                (Visitor globe will appear after you add your MapMyVisitors ID in <code>_config.yml</code>.)
               </div>
             {% endif %}
           </div>
         </div>
     
-        <!-- Country counter -->
+        <!-- Country counter (FlagCounter) -->
         <div class="col-lg-6">
           <div class="card-soft">
             <div class="fw-semibold mb-2">Country Counter</div>
     
-            {% if site.flagcounter_id and site.flagcounter_id != "" %}
-              <a target="_blank" rel="noopener" href="https://info.flagcounter.com/{{ site.flagcounter_id }}">
+            {% if site.flagcounter_id %}
+              <a target="_blank" rel="noopener"
+                 href="https://info.flagcounter.com/{{ site.flagcounter_id }}">
                 <img
-                  src="https://s01.flagcounter.com/count2/{{ site.flagcounter_id }}/bg_FFFFFF/txt_000000/border_CCCCCC/columns_4/maxflags_12/viewers_0/labels_1/pageviews_1/flags_0/percent_0/"
+                  src="https://s01.flagcounter.com/count2/{{ site.flagcounter_id }}/bg_FFFFFF/txt_000000/border_CCCCCC/columns_4/maxflags_12/viewers_0/labels_0/pageviews_0/flags_0/percent_0/"
                   alt="Flag Counter"
                   style="max-width:100%; height:auto;">
               </a>
@@ -225,6 +223,7 @@ layout: none
             {% endif %}
           </div>
         </div>
+    
       </div>
     </section>
 
