@@ -146,38 +146,49 @@ a:hover{ color: #084bb3; }
   background: #fff;
 }
 
-/* Visitors: keep ClustrMaps globe inside the card (safe version) */
+/* =========================
+   Visitors: MapMyVisitors
+   ========================= */
+
+/* Frame that holds the globe */
 .map-frame{
   width: 100%;
   height: 340px;
+  overflow: hidden;
   border-radius: 14px;
   border: 1px solid var(--border);
   background: #fff;
   position: relative;
 
-  /* ✅ important for embeds */
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  /* IMPORTANT: do NOT use flex here */
+  display: block;
 }
 
+/* The widget container (must exist in HTML exactly once) */
 #mmvst_container{
   width: 100%;
-  height: 340px;     /* ✅ make it explicit, not 100% */
+  height: 100%;
   min-height: 340px;
+  position: relative;
 }
-/* Ensure injected content fills the frame */
+
+/* If the widget injects absolute layers, force them to fill */
+#mmvst_container > div,
+.map-frame > div{
+  position: absolute !important;
+  inset: 0 !important;
+}
+
+/* Ensure injected render targets fill the frame */
 .map-frame iframe,
 .map-frame canvas,
 .map-frame svg{
   width: 100% !important;
   height: 100% !important;
+  display: block !important;
   max-width: 100% !important;
   max-height: 100% !important;
-  display: block !important;
 }
-
 
 /* Responsive */
 @media (max-width: 768px){
