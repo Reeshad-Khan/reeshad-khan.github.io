@@ -227,10 +227,12 @@ layout: none
             <div class="fw-semibold mb-2">World Map</div>
     
             {% if site.mapmyvisitors_id %}
-              <div class="map-frame">
-                <div id="mmvst_container">
-                  <script type="text/javascript" src="https://mapmyvisitors.com/globe.js?d={{ site.mapmyvisitors_id }}"></script>
-                </div>
+              <div class="map-frame" id="mmvst_container">
+                <script
+                  type="text/javascript"
+                  id="mmvst_globe"
+                  src="https://mapmyvisitors.com/globe.js?d={{ site.mapmyvisitors_id }}">
+                </script>
               </div>
             {% else %}
               <div class="small text-muted">
