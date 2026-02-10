@@ -64,6 +64,9 @@ layout: none
           <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
           <li class="nav-item"><a class="nav-link" href="#news">News</a></li>
           <li class="nav-item"><a class="nav-link" href="#research">Research</a></li>
+          <li class="nav-item"><a class="nav-link" href="#researches">Research Areas</a></li>
+          <li class="nav-item"><a class="nav-link" href="#certifications">Certifications</a></li>
+          <li class="nav-item"><a class="nav-link" href="#service">Reviewer Service</a></li>
           <li class="nav-item"><a class="nav-link" href="#publications">Publications</a></li>
           <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
           <li class="nav-item"><a class="nav-link" href="#visitors">Visitors</a></li>
@@ -112,7 +115,7 @@ layout: none
           <h2 class="h3 fw-bold">About</h2>
           <p class="text-muted mb-0">
             I work on efficient perception systems for autonomy with an emphasis on real-time deployment: BEV perception,
-            multimodal fusion, and sensing-aware learning under noisy and resource-constrained settings.
+            multisensor fusion, and sensing-aware learning under noisy and resource-constrained settings.
           </p>
         </div>
         <div class="col-lg-4">
@@ -166,6 +169,89 @@ layout: none
       </div>
     </section>
 
+    <!-- NEW: Research Areas -->
+    <section id="researches" class="section">
+      <h2 class="h3 fw-bold">Research Areas</h2>
+
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="card-soft h-100">
+            <div class="fw-semibold">Computer Vision for Autonomous Systems</div>
+            <ul class="mb-0 text-muted small">
+              <li>3D object detection, tracking, motion prediction</li>
+              <li>BEV perception, prediction & planning</li>
+              <li>Safety-aware evaluation and benchmarking</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card-soft h-100">
+            <div class="fw-semibold">Multisensor Fusion & Robust Perception</div>
+            <ul class="mb-0 text-muted small">
+              <li>Radar–vision fusion</li>
+              <li>Robust learning under noisy sensing</li>
+              <li>Uncertainty-aware inference and evaluation</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card-soft h-100">
+            <div class="fw-semibold">Efficient / Deployable AI (EdgeAI)</div>
+            <ul class="mb-0 text-muted small">
+              <li>Resource-constrained models for real-time autonomy</li>
+              <li>Optimization for GPU / embedded deployment</li>
+              <li>Systems-minded pipelines (Linux, Docker, MLOps)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card-soft h-100">
+            <div class="fw-semibold">Simulation & Tooling</div>
+            <ul class="mb-0 text-muted small">
+              <li>CARLA, SUMO, Unity</li>
+              <li>Experiment design, evaluation, visualization</li>
+              <li>Reproducible training and benchmarking</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEW: Certifications -->
+    <section id="certifications" class="section">
+      <h2 class="h3 fw-bold">Certifications</h2>
+
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="card-soft h-100">
+            <div class="fw-semibold">NVIDIA — Accelerated Computing with CUDA Python</div>
+            <div class="text-muted small">Jan 2025</div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card-soft h-100">
+            <div class="fw-semibold">NVIDIA — Generative AI with Diffusion Models</div>
+            <div class="text-muted small">Sep 2025</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEW: Reviewer Service -->
+    <section id="service" class="section">
+      <h2 class="h3 fw-bold">Reviewer Service</h2>
+      <div class="card-soft">
+        <ul class="mb-0">
+          <li><span class="fw-semibold">Reviewer</span>, ICASSP 2026</li>
+          <li><span class="fw-semibold">Reviewer</span>, IEEE Big Data 2022</li>
+        </ul>
+      </div>
+    </section>
+
     <section id="publications" class="section">
       <div class="d-flex align-items-center justify-content-between mb-2">
         <h2 class="h3 fw-bold mb-0">Publications</h2>
@@ -214,18 +300,18 @@ layout: none
         <div><span class="fw-semibold">GitHub:</span> <a target="_blank" rel="noopener" href="https://github.com/Reeshad-Khan">github.com/Reeshad-Khan</a></div>
       </div>
     </section>
-    
+
     <section id="visitors" class="section">
       <h2 class="h3 fw-bold">Visitors</h2>
       <p class="text-muted small mb-3">World visitor map + country counts.</p>
-    
+
       <div class="row g-3">
-    
+
         <!-- Globe (MapMyVisitors) -->
         <div class="col-lg-6">
           <div class="card-soft">
             <div class="fw-semibold mb-2">World Map</div>
-    
+
             {% if site.mapmyvisitors_id %}
               <div class="map-frame" id="mmvst_container">
                 <script
@@ -241,12 +327,12 @@ layout: none
             {% endif %}
           </div>
         </div>
-    
+
         <!-- Country counter (FlagCounter) -->
         <div class="col-lg-6">
           <div class="card-soft">
             <div class="fw-semibold mb-2">Country Counter</div>
-    
+
             {% if site.flagcounter_id %}
               <a target="_blank" rel="noopener"
                  href="https://info.flagcounter.com/{{ site.flagcounter_id }}">
@@ -262,7 +348,7 @@ layout: none
             {% endif %}
           </div>
         </div>
-    
+
       </div>
     </section>
 
@@ -277,6 +363,6 @@ layout: none
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="/assets/js/site.js"></script>
-  
+
 </body>
 </html>
