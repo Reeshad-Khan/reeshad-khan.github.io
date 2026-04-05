@@ -563,7 +563,7 @@ a:hover{
 
 .map-frame{
   width:100%;
-  min-height:340px;
+  min-height:285px;
   border-radius:1.15rem;
   border:1px solid var(--line);
   background:#fff;
@@ -571,14 +571,14 @@ a:hover{
   display:flex;
   align-items:flex-start;
   justify-content:center;
-  padding:1rem 0.75rem 0;
+  padding:0.85rem 0.75rem 0.35rem;
 }
 
 .map-script-anchor{
   width:100%;
   display:flex;
   justify-content:center;
-  min-height:320px;
+  min-height:260px;
 }
 
 .map-frame .mmvst_outer{
