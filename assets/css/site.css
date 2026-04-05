@@ -1,0 +1,278 @@
+:root {
+  --page-width: 980px;
+  --ink: #151515;
+  --muted: #666;
+  --line: #d9d9d9;
+  --soft: #f5f5f2;
+  --bg: #fcfcfa;
+  --link: #0f4da8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.6;
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.page {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 40px 24px 56px;
+}
+
+.masthead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 240px;
+  gap: 32px;
+  align-items: start;
+}
+
+.masthead h1 {
+  margin: 0 0 12px;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.masthead h1 span {
+  font-size: 0.72em;
+  font-weight: 400;
+}
+
+.lede,
+.bio,
+.focus-line,
+.section-block p,
+.section-block li {
+  font-size: 1rem;
+}
+
+.lede {
+  margin: 0 0 12px;
+}
+
+.bio {
+  margin: 0 0 16px;
+}
+
+.focus-line {
+  margin: 10px 0 0;
+  color: var(--muted);
+}
+
+.masthead-media img {
+  width: 100%;
+  aspect-ratio: 1 / 1.15;
+  object-fit: cover;
+  border: 1px solid var(--line);
+}
+
+.link-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.section-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  padding: 18px 0 0;
+  margin: 18px 0 8px;
+  border-top: 1px solid var(--line);
+}
+
+.section-block {
+  padding: 20px 0 22px;
+  border-top: 1px solid var(--line);
+}
+
+.section-block h2 {
+  margin: 0 0 12px;
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+
+.section-block h3 {
+  margin: 0 0 8px;
+  font-size: 1.06rem;
+  font-weight: 700;
+}
+
+.section-block ul {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.news-list {
+  list-style: none;
+  padding: 0;
+}
+
+.news-list li {
+  display: grid;
+  grid-template-columns: 86px 1fr;
+  gap: 14px;
+  padding: 6px 0;
+}
+
+.news-date {
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.pub-list {
+  display: grid;
+  gap: 18px;
+}
+
+.pub-item {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.pub-thumb img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+
+.pub-copy h3 {
+  margin: 0 0 6px;
+  font-size: 1.08rem;
+  line-height: 1.4;
+}
+
+.pub-meta,
+.pub-venue,
+.pub-status,
+.pub-links {
+  margin: 0 0 6px;
+}
+
+.pub-venue,
+.pub-status {
+  color: var(--muted);
+}
+
+.pub-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0;
+}
+
+.pub-tags span {
+  padding: 2px 8px;
+  border: 1px solid var(--line);
+  background: var(--soft);
+  font-size: 0.9rem;
+}
+
+.visitor-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.visitor-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.map-frame {
+  width: 100%;
+  height: 340px;
+  min-height: 340px;
+  position: relative;
+  overflow: hidden;
+}
+
+#mmvst_container {
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  position: relative;
+}
+
+#mmvst_container > div,
+.map-frame > div {
+  position: absolute !important;
+  inset: 0 !important;
+}
+
+.map-frame iframe,
+.map-frame canvas,
+.map-frame svg,
+.visitor-card img {
+  width: 100% !important;
+  max-width: 100%;
+  height: auto;
+}
+
+.site-footer {
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 820px) {
+  .masthead,
+  .two-col,
+  .visitor-grid,
+  .pub-item {
+    grid-template-columns: 1fr;
+  }
+
+  .masthead-media {
+    max-width: 260px;
+  }
+
+  .news-list li {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}

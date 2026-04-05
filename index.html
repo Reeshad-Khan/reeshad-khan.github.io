@@ -1,0 +1,230 @@
+---
+layout: none
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ site.title }}</title>
+  <meta name="description" content="{{ site.description }}" />
+
+  <link rel="canonical" href="{{ site.url }}/" />
+
+  <meta property="og:title" content="{{ site.title }}" />
+  <meta property="og:description" content="{{ site.description }}" />
+  <meta property="og:url" content="{{ site.url }}/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="{{ site.url }}/assets/img/profile.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ site.title }}" />
+  <meta name="twitter:description" content="{{ site.description }}" />
+  <meta name="twitter:image" content="{{ site.url }}/assets/img/profile.jpg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Reeshad Khan",
+    "honorificSuffix": "Ph.D.",
+    "url": "{{ site.url }}/",
+    "image": "{{ site.url }}/assets/img/profile.jpg",
+    "affiliation": {
+      "@type": "CollegeOrUniversity",
+      "name": "University of Arkansas"
+    },
+    "sameAs": [
+      "https://scholar.google.com/citations?user=D3rO3W4AAAAJ",
+      "https://github.com/Reeshad-Khan",
+      "https://www.linkedin.com/in/reeshad-khan-a50207106/"
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/site.css" />
+</head>
+
+<body>
+  <div class="page">
+    <header class="masthead">
+      <div class="masthead-copy">
+        <h1>Reeshad Khan <span>Ph.D.</span></h1>
+        <p class="lede">
+          I work on efficient AI for autonomous systems, with a focus on BEV perception, multisensor fusion,
+          sensing-aware learning, and real-time deployment under noisy and resource-constrained settings.
+        </p>
+        <p class="bio">
+          I completed my Ph.D. in Computer Science at the University of Arkansas, where my dissertation focused on
+          efficient deep neural networks for autonomous perception. My research sits at the intersection of computer vision,
+          robust perception, and deployable machine learning systems.
+        </p>
+
+        <ul class="link-row">
+          <li><a href="mailto:rk010@uark.edu">Email</a></li>
+          <li><a target="_blank" rel="noopener" href="https://scholar.google.com/citations?user=D3rO3W4AAAAJ">Google Scholar</a></li>
+          <li><a target="_blank" rel="noopener" href="https://github.com/Reeshad-Khan">GitHub</a></li>
+          <li><a target="_blank" rel="noopener" href="https://www.linkedin.com/in/reeshad-khan-a50207106/">LinkedIn</a></li>
+          <li><a href="/assets/cv/Reeshad%20Khan_CV.pdf">CV</a></li>
+        </ul>
+
+        <p class="focus-line">
+          Research interests: BEV autonomy, radar-vision fusion, robust learning, EdgeAI deployment, and RAW-to-task co-design.
+        </p>
+      </div>
+
+      <div class="masthead-media">
+        <img src="/assets/img/profile.jpg" alt="Portrait of Reeshad Khan" />
+      </div>
+    </header>
+
+    <nav class="section-nav" aria-label="Section navigation">
+      <a href="#news">News</a>
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
+      <a href="#service">Service</a>
+      <a href="#awards">Awards</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <main>
+      <section id="news" class="section-block">
+        <h2>News</h2>
+        <ul class="news-list">
+          {% assign items = site.data.news | sort: "date" | reverse %}
+          {% for n in items %}
+            <li>
+              <span class="news-date">{{ n.date | date: "%m/%Y" }}</span>
+              <span class="news-text">{{ n.text }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+
+      <section id="research" class="section-block">
+        <h2>Research</h2>
+        <p>
+          My work aims to make autonomous perception systems more efficient, robust, and deployable in real-world settings.
+          I am particularly interested in models that preserve strong performance while respecting sensing, latency, and compute constraints.
+        </p>
+        <div class="two-col">
+          <div>
+            <h3>Core Topics</h3>
+            <ul>
+              <li>3D perception, tracking, motion prediction, and planning in BEV</li>
+              <li>Radar-vision fusion and uncertainty-aware perception</li>
+              <li>Robust learning under noisy or resource-constrained sensing</li>
+              <li>Efficient models for GPU and embedded deployment</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Tools and Systems</h3>
+            <ul>
+              <li>PyTorch, CUDA, Linux, Docker, and MLOps workflows</li>
+              <li>CARLA, SUMO, and simulation-driven evaluation</li>
+              <li>Experiment design, benchmarking, and visualization pipelines</li>
+              <li>RAW-to-task sensing and restoration-aware learning</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="publications" class="section-block">
+        <h2>Publications</h2>
+        <div class="pub-list">
+          {% assign pubs = site.data.publications | sort: "year" | reverse %}
+          {% for p in pubs %}
+            <article class="pub-item">
+              <a class="pub-thumb" href="{{ p.pdf }}">
+                <img src="{{ p.thumb }}" alt="Thumbnail for {{ p.title }}" />
+              </a>
+              <div class="pub-copy">
+                <h3>
+                  <a href="{{ p.pdf }}">{{ p.title }}</a>
+                </h3>
+                <p class="pub-meta">{{ p.authors }}</p>
+                <p class="pub-venue">{{ p.venue }}</p>
+                <p class="pub-status">{{ p.status }}</p>
+                <div class="pub-tags">
+                  {% for t in p.tags %}
+                    <span>{{ t }}</span>
+                  {% endfor %}
+                </div>
+                <p class="pub-links">
+                  <a href="{{ p.pdf }}">Paper</a>
+                </p>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section id="service" class="section-block">
+        <h2>Service</h2>
+        <ul>
+          <li>Reviewer, ICASSP 2026</li>
+          <li>Reviewer, IEEE Big Data 2022</li>
+        </ul>
+      </section>
+
+      <section id="awards" class="section-block">
+        <h2>Awards and Recognition</h2>
+        <ul>
+          <li>Reginald R. "Barney" and Jameson A. Baxter Graduate Fellowship, 2024</li>
+          <li>EECS Graduate Fellowship, University of Arkansas, 2023</li>
+          <li>College of Engineering Graduate Fellowship, University of Arkansas, 2022</li>
+          <li>Chinese Government Belt and Road Scholarship, 2019</li>
+        </ul>
+      </section>
+
+      <section id="contact" class="section-block">
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:rk010@uark.edu">rk010@uark.edu</a></p>
+        <p>GitHub: <a target="_blank" rel="noopener" href="https://github.com/Reeshad-Khan">github.com/Reeshad-Khan</a></p>
+        <p>LinkedIn: <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/reeshad-khan-a50207106/">linkedin.com/in/reeshad-khan-a50207106</a></p>
+      </section>
+
+      <section id="visitors" class="section-block">
+        <h2>Visitors</h2>
+        <div class="visitor-grid">
+          <div class="visitor-card">
+            <h3>World Map</h3>
+            {% if site.mapmyvisitors_id %}
+              <div class="map-frame" id="mmvst_container">
+                <script
+                  type="text/javascript"
+                  id="mmvst_globe"
+                  src="https://mapmyvisitors.com/globe.js?d={{ site.mapmyvisitors_id }}">
+                </script>
+              </div>
+            {% else %}
+              <p class="muted">Add your MapMyVisitors ID in <code>_config.yml</code> to show the globe.</p>
+            {% endif %}
+          </div>
+
+          <div class="visitor-card">
+            <h3>Country Counter</h3>
+            {% if site.flagcounter_id %}
+              <a target="_blank" rel="noopener" href="https://info.flagcounter.com/{{ site.flagcounter_id }}">
+                <img
+                  src="https://s01.flagcounter.com/count2/{{ site.flagcounter_id }}/bg_FFFFFF/txt_000000/border_CCCCCC/columns_4/maxflags_12/viewers_0/labels_0/pageviews_0/flags_0/percent_0/"
+                  alt="Flag Counter"
+                />
+              </a>
+            {% else %}
+              <p class="muted">Add your FlagCounter ID in <code>_config.yml</code> to show the country counter.</p>
+            {% endif %}
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; <span id="y"></span> {{ site.title }}</p>
+    </footer>
+  </div>
+
+  <script src="/assets/js/site.js"></script>
+</body>
+</html>
