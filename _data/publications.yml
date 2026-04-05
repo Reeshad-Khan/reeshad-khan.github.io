@@ -15,7 +15,11 @@
   authors: "Reeshad Khan et al."
   year: 2025
   tags: ["Diffusion", "Unsupervised", "MRI"]
+<<<<<<< HEAD
   pdf: "/assets/papers/bayesian_pgure.pdf.pdf"
+=======
+  pdf: "/assets/papers/bayesian_pgure.pdf"
+>>>>>>> 0c226ef9dde45013ac8b64fe3eb00ff72ccef498
   thumb: "/assets/img/papers/bayesian_pgure.png"
 
 - key: oversampling_ieee_access
