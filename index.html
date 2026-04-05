@@ -2,560 +2,407 @@
 layout: none
 ---
 
+{% assign pubs = site.data.publications | sort: "year" | reverse %}
+{% assign news_items = site.data.news | sort: "date" | reverse %}
+{% assign total_pubs = pubs | size %}
+{% assign total_news = news_items | size %}
+{% assign accepted_count = 0 %}
+{% assign published_count = 0 %}
+{% assign review_count = 0 %}
+{% for p in pubs %}
+  {% if p.status == "Accepted" %}
+    {% assign accepted_count = accepted_count | plus: 1 %}
+  {% elsif p.status == "Published" %}
+    {% assign published_count = published_count | plus: 1 %}
+  {% elsif p.status == "Under review" %}
+    {% assign review_count = review_count | plus: 1 %}
+  {% endif %}
+{% endfor %}
+{% assign featured_pub = pubs.first %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<<<<<<< HEAD
-  <title>{{ site.title }}</title>
+  <title>{{ site.title }} | Efficient AI and Autonomous Perception</title>
   <meta name="description" content="{{ site.description }}" />
-
-  <link rel="canonical" href="{{ site.url }}/" />
-
-=======
-  <title>{{ site.title }} | Computer Vision & Autonomous Systems</title>
-  <meta name="description" content="{{ site.description }}" />
-
-  <!-- Canonical -->
-  <link rel="canonical" href="{{ site.url }}/" />
-
-  <!-- Open Graph (LinkedIn / Facebook) -->
->>>>>>> 0c226ef9dde45013ac8b64fe3eb00ff72ccef498
-  <meta property="og:title" content="{{ site.title }}" />
-  <meta property="og:description" content="{{ site.description }}" />
-  <meta property="og:url" content="{{ site.url }}/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="{{ site.url }}/assets/img/profile.jpg" />
-
-<<<<<<< HEAD
-=======
-  <!-- Twitter Card -->
->>>>>>> 0c226ef9dde45013ac8b64fe3eb00ff72ccef498
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="{{ site.title }}" />
-  <meta name="twitter:description" content="{{ site.description }}" />
-  <meta name="twitter:image" content="{{ site.url }}/assets/img/profile.jpg" />
-
-<<<<<<< HEAD
-=======
-  <!-- Structured Data (helps Google understand who you are) -->
->>>>>>> 0c226ef9dde45013ac8b64fe3eb00ff72ccef498
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Reeshad Khan",
-    "honorificSuffix": "Ph.D.",
-    "url": "{{ site.url }}/",
-    "image": "{{ site.url }}/assets/img/profile.jpg",
-    "affiliation": {
-      "@type": "CollegeOrUniversity",
-      "name": "University of Arkansas"
-    },
-    "sameAs": [
-      "https://scholar.google.com/citations?user=D3rO3W4AAAAJ",
-      "https://github.com/Reeshad-Khan",
-      "https://www.linkedin.com/in/reeshad-khan-a50207106/"
-    ]
-  }
-  </script>
-
-<<<<<<< HEAD
-=======
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
->>>>>>> 0c226ef9dde45013ac8b64fe3eb00ff72ccef498
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="/assets/css/site.css" />
 </head>
 
 <body>
-<<<<<<< HEAD
-  <div class="page">
-    <header class="masthead">
-      <div class="masthead-copy">
-        <h1>Reeshad Khan <span>Ph.D.</span></h1>
-        <p class="lede">
-          I work on efficient AI for autonomous systems, with a focus on BEV perception, multisensor fusion,
-          sensing-aware learning, and real-time deployment under noisy and resource-constrained settings.
-        </p>
-        <p class="bio">
-          I completed my Ph.D. in Computer Science at the University of Arkansas, where my dissertation focused on
-          efficient deep neural networks for autonomous perception. My research sits at the intersection of computer vision,
-          robust perception, and deployable machine learning systems.
-        </p>
-
-        <ul class="link-row">
-          <li><a href="mailto:rk010@uark.edu">Email</a></li>
-          <li><a target="_blank" rel="noopener" href="https://scholar.google.com/citations?user=D3rO3W4AAAAJ">Google Scholar</a></li>
-          <li><a target="_blank" rel="noopener" href="https://github.com/Reeshad-Khan">GitHub</a></li>
-          <li><a target="_blank" rel="noopener" href="https://www.linkedin.com/in/reeshad-khan-a50207106/">LinkedIn</a></li>
-          <li><a href="/assets/cv/Reeshad%20Khan_CV.pdf">CV</a></li>
-        </ul>
-
-        <p class="focus-line">
-          Research interests: BEV autonomy, radar-vision fusion, robust learning, EdgeAI deployment, and RAW-to-task co-design.
-        </p>
+  <div class="page-shell">
+    <nav class="navbar navbar-expand-lg site-nav sticky-top">
+      <div class="container">
+        <a class="navbar-brand brand-mark" href="#top">
+          <span class="brand-initials">RK</span>
+          <span class="brand-text">
+            <strong>Reeshad Khan</strong>
+            <small>Efficient AI and Autonomous Perception</small>
+          </span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="nav" class="collapse navbar-collapse">
+          <ul class="navbar-nav ms-auto nav-links">
+            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#news">News</a></li>
+            <li class="nav-item"><a class="nav-link" href="#research">Research</a></li>
+            <li class="nav-item"><a class="nav-link" href="#publications">Publications</a></li>
+            <li class="nav-item"><a class="nav-link" href="#visitors">Visitors</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          </ul>
+        </div>
       </div>
+    </nav>
 
-      <div class="masthead-media">
-        <img src="/assets/img/profile.jpg" alt="Portrait of Reeshad Khan" />
+    <header id="top" class="hero">
+      <div class="hero-orb hero-orb-a"></div>
+      <div class="hero-orb hero-orb-b"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy" data-reveal>
+          <div class="eyebrow">Researcher in edge intelligence and sensing-aware autonomy</div>
+          <h1>Building efficient perception systems that survive real-world constraints.</h1>
+          <p class="hero-lead">
+            I work on real-time BEV perception, radar-vision fusion, and RAW-to-task co-design for autonomous systems,
+            with an emphasis on deployment efficiency, robustness, and sensing-aware learning.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-lg" target="_blank" rel="noopener" href="https://scholar.google.com/citations?user=D3rO3W4AAAAJ">Google Scholar</a>
+            <a class="btn btn-outline-dark btn-lg" href="/assets/cv/Reeshad%20Khan_CV.pdf">Curriculum Vitae</a>
+            <a class="btn btn-outline-secondary btn-lg" target="_blank" rel="noopener" href="https://github.com/Reeshad-Khan">GitHub</a>
+          </div>
+          <div class="signal-row">
+            <span class="signal-pill">Real-Time BEV</span>
+            <span class="signal-pill">EdgeAI Deployment</span>
+            <span class="signal-pill">Radar-Vision Fusion</span>
+            <span class="signal-pill">RAW-to-Task</span>
+            <span class="signal-pill">3D Perception</span>
+          </div>
+        </div>
+
+        <aside class="hero-panel" data-reveal data-reveal-delay="120">
+          <div class="profile-card">
+            <img class="profile" src="/assets/img/profile.jpg" alt="Portrait of Reeshad Khan" />
+            <div class="profile-meta">
+              <div class="meta-label">Current Position</div>
+              <div class="meta-value">Ph.D., Computer Science</div>
+              <div class="meta-note">University of Arkansas · Dissertation defended on Dec 8, 2025</div>
+            </div>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-card">
+              <div class="stat-value" data-counter="{{ total_pubs }}">0</div>
+              <div class="stat-label">Research papers</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" data-counter="{{ accepted_count | plus: published_count }}">0</div>
+              <div class="stat-label">Accepted or published</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" data-counter="{{ total_news }}">0</div>
+              <div class="stat-label">Recent milestones</div>
+            </div>
+          </div>
+        </aside>
       </div>
     </header>
 
-    <nav class="section-nav" aria-label="Section navigation">
-      <a href="#news">News</a>
-      <a href="#research">Research</a>
-      <a href="#publications">Publications</a>
-      <a href="#service">Service</a>
-      <a href="#awards">Awards</a>
-      <a href="#contact">Contact</a>
-    </nav>
-
     <main>
-      <section id="news" class="section-block">
-        <h2>News</h2>
-        <ul class="news-list">
-          {% assign items = site.data.news | sort: "date" | reverse %}
-          {% for n in items %}
-            <li>
-              <span class="news-date">{{ n.date | date: "%m/%Y" }}</span>
-              <span class="news-text">{{ n.text }}</span>
-            </li>
-          {% endfor %}
-        </ul>
-      </section>
-
-      <section id="research" class="section-block">
-        <h2>Research</h2>
-        <p>
-          My work aims to make autonomous perception systems more efficient, robust, and deployable in real-world settings.
-          I am particularly interested in models that preserve strong performance while respecting sensing, latency, and compute constraints.
-        </p>
-        <div class="two-col">
-          <div>
-            <h3>Core Topics</h3>
-            <ul>
-              <li>3D perception, tracking, motion prediction, and planning in BEV</li>
-              <li>Radar-vision fusion and uncertainty-aware perception</li>
-              <li>Robust learning under noisy or resource-constrained sensing</li>
-              <li>Efficient models for GPU and embedded deployment</li>
-            </ul>
+      <section id="about" class="section section-split" data-reveal>
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">About</div>
+              <h2>Focused on efficient autonomy from sensor to decision.</h2>
+            </div>
+            <p>
+              My work connects perception models, sensing design, and deployment constraints. I am interested in systems
+              that can reason reliably under noise, limited compute, and the mismatch between clean benchmarks and field conditions.
+            </p>
           </div>
-          <div>
-            <h3>Tools and Systems</h3>
-            <ul>
-              <li>PyTorch, CUDA, Linux, Docker, and MLOps workflows</li>
-              <li>CARLA, SUMO, and simulation-driven evaluation</li>
-              <li>Experiment design, benchmarking, and visualization pipelines</li>
-              <li>RAW-to-task sensing and restoration-aware learning</li>
-            </ul>
-          </div>
-        </div>
-      </section>
 
-      <section id="publications" class="section-block">
-        <h2>Publications</h2>
-        <div class="pub-list">
-          {% assign pubs = site.data.publications | sort: "year" | reverse %}
-          {% for p in pubs %}
-            <article class="pub-item">
-              <a class="pub-thumb" href="{{ p.pdf }}">
-                <img src="{{ p.thumb }}" alt="Thumbnail for {{ p.title }}" />
-              </a>
-              <div class="pub-copy">
-                <h3>
-                  <a href="{{ p.pdf }}">{{ p.title }}</a>
-                </h3>
-                <p class="pub-meta">{{ p.authors }}</p>
-                <p class="pub-venue">{{ p.venue }}</p>
-                <p class="pub-status">{{ p.status }}</p>
-                <div class="pub-tags">
-                  {% for t in p.tags %}
-                    <span>{{ t }}</span>
-                  {% endfor %}
-                </div>
-                <p class="pub-links">
-                  <a href="{{ p.pdf }}">Paper</a>
-                </p>
-              </div>
+          <div class="about-grid">
+            <article class="glass-card about-story">
+              <p>
+                I study how to make autonomous perception pipelines smaller, faster, and more robust without giving up
+                task performance. That includes distillation for BEV systems, multimodal fusion, unsupervised restoration,
+                and task-aware sensing pipelines that treat the imaging stack as part of the learning problem.
+              </p>
+              <p class="about-note">
+                The goal is practical autonomy: models that work under latency budgets, degraded sensing, and real deployment constraints.
+              </p>
             </article>
-          {% endfor %}
-        </div>
-      </section>
 
-      <section id="service" class="section-block">
-        <h2>Service</h2>
-        <ul>
-          <li>Reviewer, ICASSP 2026</li>
-          <li>Reviewer, IEEE Big Data 2022</li>
-        </ul>
-      </section>
-
-      <section id="awards" class="section-block">
-        <h2>Awards and Recognition</h2>
-        <ul>
-          <li>Reginald R. "Barney" and Jameson A. Baxter Graduate Fellowship, 2024</li>
-          <li>EECS Graduate Fellowship, University of Arkansas, 2023</li>
-          <li>College of Engineering Graduate Fellowship, University of Arkansas, 2022</li>
-          <li>Chinese Government Belt and Road Scholarship, 2019</li>
-        </ul>
-      </section>
-
-      <section id="contact" class="section-block">
-        <h2>Contact</h2>
-        <p>Email: <a href="mailto:rk010@uark.edu">rk010@uark.edu</a></p>
-        <p>GitHub: <a target="_blank" rel="noopener" href="https://github.com/Reeshad-Khan">github.com/Reeshad-Khan</a></p>
-        <p>LinkedIn: <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/reeshad-khan-a50207106/">linkedin.com/in/reeshad-khan-a50207106</a></p>
-      </section>
-
-      <section id="visitors" class="section-block">
-        <h2>Visitors</h2>
-        <div class="visitor-grid">
-          <div class="visitor-card">
-            <h3>World Map</h3>
-=======
-  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top">
-    <div class="container">
-      <a class="navbar-brand fw-semibold" href="#top">Reeshad Khan, Ph.D.</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div id="nav" class="collapse navbar-collapse">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#news">News</a></li>
-          <li class="nav-item"><a class="nav-link" href="#research">Research</a></li>
-          <li class="nav-item"><a class="nav-link" href="#researches">Research Areas</a></li>
-          <li class="nav-item"><a class="nav-link" href="#certifications">Certifications</a></li>
-          <li class="nav-item"><a class="nav-link" href="#service">Reviewer Service</a></li>
-          <li class="nav-item"><a class="nav-link" href="#publications">Publications</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-          <li class="nav-item"><a class="nav-link" href="#visitors">Visitors</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <header id="top" class="hero">
-    <div class="container py-5">
-      <div class="row align-items-center g-4">
-        <div class="col-lg-8">
-          <h1 class="display-6 fw-bold mb-2">Reeshad Khan, Ph.D.</h1>
-          <p class="lead mb-3">
-            Efficient AI (EdgeAI) & Autonomous Systems Perception, Prediction & Planning — BEV • Radar–Vision Fusion • RAW-to-Task Co-Design
-          </p>
-
-          <div class="d-flex flex-wrap gap-2">
-            <a class="btn btn-primary" target="_blank" rel="noopener" href="https://github.com/Reeshad-Khan">GitHub</a>
-            <a class="btn btn-outline-primary" target="_blank" rel="noopener" href="https://scholar.google.com/citations?user=D3rO3W4AAAAJ">Google Scholar</a>
-            <a class="btn btn-outline-dark" href="/assets/cv/Reeshad_Khan_CV.pdf">CV (PDF)</a>
-            <a class="btn btn-outline-secondary" target="_blank" rel="noopener" href="https://www.linkedin.com/in/reeshad-khan-a50207106/">LinkedIn</a>
-          </div>
-
-          <div class="pill-row mt-4">
-            <span class="pill">Real-Time BEV</span>
-            <span class="pill">EdgeAI Deployment</span>
-            <span class="pill">Radar–Vision Fusion</span>
-            <span class="pill">RAW-to-Task Co-Design</span>
-            <span class="pill">3D Perception, Prediction and Planning</span>
-          </div>
-        </div>
-
-        <div class="col-lg-4 text-lg-end text-center">
-          <img class="profile" src="/assets/img/profile.jpg" alt="Reeshad Khan headshot" />
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main class="container py-5">
-
-    <section id="about" class="section">
-      <div class="row g-4">
-        <div class="col-lg-8">
-          <h2 class="h3 fw-bold">About</h2>
-          <p class="text-muted mb-0">
-            I work on efficient perception systems for autonomy with an emphasis on real-time deployment: BEV perception,
-            multisensor fusion, and sensing-aware learning under noisy and resource-constrained settings.
-          </p>
-        </div>
-        <div class="col-lg-4">
-          <div class="card-soft">
-            <div class="small text-muted">Currently</div>
-            <div class="fw-semibold">Ph.D. (CS), University of Arkansas</div>
-            <div class="small text-muted">Dissertation defended Dec 8, 2025</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="news" class="section">
-      <div class="d-flex align-items-center justify-content-between mb-2">
-        <h2 class="h3 fw-bold mb-0">News</h2>
-        <div class="small text-muted">acceptances • awards • milestones</div>
-      </div>
-
-      <div class="timeline">
-        {% assign items = site.data.news | sort: "date" | reverse %}
-        {% for n in items %}
-          <div class="timeline-item">
-            <div class="timeline-date">{{ n.date }}</div>
-            <div class="timeline-dot">{{ n.icon }}</div>
-            <div class="timeline-content">{{ n.text }}</div>
-          </div>
-        {% endfor %}
-      </div>
-    </section>
-
-    <section id="research" class="section">
-      <h2 class="h3 fw-bold">Research</h2>
-
-      <div class="row g-3">
-        <div class="col-md-6">
-          <div class="card-soft h-100">
-            <div class="fw-semibold">Efficient 3D Perception & BEV Autonomy</div>
-            <div class="text-muted small">
-              Resource-aware BEV perception/planning, distillation, and modular pipelines for autonomy.
+            <div class="about-rail">
+              <article class="mini-card">
+                <span class="mini-label">Core Themes</span>
+                <strong>BEV autonomy, multimodal fusion, sensing-aware learning</strong>
+              </article>
+              <article class="mini-card">
+                <span class="mini-label">Current Direction</span>
+                <strong>Resource-aware perception and optics-sensor-model co-design</strong>
+              </article>
+              <article class="mini-card">
+                <span class="mini-label">Research Style</span>
+                <strong>Deployment-first, task-driven, experimentally grounded</strong>
+              </article>
             </div>
           </div>
         </div>
-        <div class="col-md-6">
-          <div class="card-soft h-100">
-            <div class="fw-semibold">Robust Learning under Noisy Sensing</div>
-            <div class="text-muted small">
-              Sensing-aware learning, RAW-to-task pipelines, and restoration methods for challenging conditions.
+      </section>
+
+      <section id="news" class="section section-alt" data-reveal>
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">Recent Activity</div>
+              <h2>News, acceptances, and milestones.</h2>
             </div>
+            <p>A compact running timeline of papers, awards, and academic progress.</p>
+          </div>
+
+          <div class="timeline">
+            {% for n in news_items %}
+              <article class="timeline-item">
+                <div class="timeline-date">{{ n.date | date: "%b %Y" }}</div>
+                <div class="timeline-dot">{{ n.icon }}</div>
+                <div class="timeline-content">{{ n.text }}</div>
+              </article>
+            {% endfor %}
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- NEW: Research Areas -->
-    <section id="researches" class="section">
-      <h2 class="h3 fw-bold">Research Areas</h2>
+      <section id="research" class="section" data-reveal>
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">Research</div>
+              <h2>Three problem spaces shaping the work.</h2>
+            </div>
+            <p>Each thread is tied to deployable autonomy rather than benchmark-only performance.</p>
+          </div>
 
-      <div class="row g-3">
-        <div class="col-md-6">
-          <div class="card-soft h-100">
-            <div class="fw-semibold">Computer Vision for Autonomous Systems</div>
-            <ul class="mb-0 text-muted small">
-              <li>3D object detection, tracking, motion prediction</li>
-              <li>BEV perception, prediction & planning</li>
-              <li>Safety-aware evaluation and benchmarking</li>
-            </ul>
+          <div class="research-grid">
+            <article class="research-card">
+              <span class="research-index">01</span>
+              <h3>Efficient 3D perception and BEV autonomy</h3>
+              <p>Distilled and modular BEV pipelines for real-time perception and planning under strict compute budgets.</p>
+            </article>
+            <article class="research-card">
+              <span class="research-index">02</span>
+              <h3>Robust learning under noisy sensing</h3>
+              <p>Unsupervised denoising, restoration, and risk-aware learning when labels are scarce and measurements are corrupted.</p>
+            </article>
+            <article class="research-card">
+              <span class="research-index">03</span>
+              <h3>Sensing-aware co-design</h3>
+              <p>Joint optics-sensor-model design that optimizes sensing itself for downstream autonomous tasks.</p>
+            </article>
           </div>
         </div>
+      </section>
 
-        <div class="col-md-6">
-          <div class="card-soft h-100">
-            <div class="fw-semibold">Multisensor Fusion & Robust Perception</div>
-            <ul class="mb-0 text-muted small">
-              <li>Radar–vision fusion</li>
-              <li>Robust learning under noisy sensing</li>
-              <li>Uncertainty-aware inference and evaluation</li>
-            </ul>
+      <section id="publications" class="section section-publications" data-reveal>
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">Selected Work</div>
+              <h2>Publications with interactive filtering.</h2>
+            </div>
+            <p>The layout keeps the page scannable while letting visitors focus on published, accepted, or in-progress work.</p>
           </div>
-        </div>
 
-        <div class="col-md-6">
-          <div class="card-soft h-100">
-            <div class="fw-semibold">Efficient / Deployable AI (EdgeAI)</div>
-            <ul class="mb-0 text-muted small">
-              <li>Resource-constrained models for real-time autonomy</li>
-              <li>Optimization for GPU / embedded deployment</li>
-              <li>Systems-minded pipelines (Linux, Docker, MLOps)</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="card-soft h-100">
-            <div class="fw-semibold">Simulation & Tooling</div>
-            <ul class="mb-0 text-muted small">
-              <li>CARLA, SUMO, Unity</li>
-              <li>Experiment design, evaluation, visualization</li>
-              <li>Reproducible training and benchmarking</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- NEW: Certifications -->
-    <section id="certifications" class="section">
-      <h2 class="h3 fw-bold">Certifications</h2>
-
-      <div class="row g-3">
-        <div class="col-md-6">
-          <div class="card-soft h-100">
-            <div class="fw-semibold">NVIDIA — Accelerated Computing with CUDA Python</div>
-            <div class="text-muted small">Jan 2025</div>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="card-soft h-100">
-            <div class="fw-semibold">NVIDIA — Generative AI with Diffusion Models</div>
-            <div class="text-muted small">Sep 2025</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- NEW: Reviewer Service -->
-    <section id="service" class="section">
-      <h2 class="h3 fw-bold">Reviewer Service</h2>
-      <div class="card-soft">
-        <ul class="mb-0">
-          <li><span class="fw-semibold">Reviewer</span>, ICASSP 2026</li>
-          <li><span class="fw-semibold">Reviewer</span>, IEEE Big Data 2022</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="publications" class="section">
-      <div class="d-flex align-items-center justify-content-between mb-2">
-        <h2 class="h3 fw-bold mb-0">Publications</h2>
-        <div class="small text-muted">click a title to open the PDF</div>
-      </div>
-
-      <div class="vstack gap-3">
-        {% assign pubs = site.data.publications | sort: "year" | reverse %}
-        {% for p in pubs %}
-          <article class="pub-card">
-            <div class="pub-main">
-              <div class="pub-status">{{ p.status }}</div>
-              <h3 class="h5 mb-1">
-                <a class="pub-title" href="{{ p.pdf }}">{{ p.title }}</a>
-              </h3>
-              <div class="text-muted small mb-2">
-                {{ p.authors }} · <span class="fw-semibold">{{ p.venue }}</span>
-              </div>
-
-              <div class="d-flex flex-wrap gap-2 mb-2">
-                {% for t in p.tags %}
+          <div class="featured-publication">
+            <div class="featured-copy">
+              <div class="featured-label">Featured publication</div>
+              <h3><a href="{{ featured_pub.pdf }}">{{ featured_pub.title }}</a></h3>
+              <p>{{ featured_pub.authors }} · <span>{{ featured_pub.venue }}</span></p>
+              <div class="pub-tags">
+                {% for t in featured_pub.tags %}
                   <span class="tag">{{ t }}</span>
                 {% endfor %}
               </div>
-
-              <div class="d-flex flex-wrap gap-2">
-                <a class="btn btn-sm btn-primary" href="{{ p.pdf }}">PDF</a>
+              <div class="featured-actions">
+                <a class="btn btn-primary" href="{{ featured_pub.pdf }}">Read Paper</a>
+                <span class="pub-status is-inline">{{ featured_pub.status }}</span>
               </div>
             </div>
-
-            <div class="pub-thumb">
-              <a href="{{ p.pdf }}" aria-label="Open PDF">
-                <img src="{{ p.thumb }}" alt="Thumbnail for {{ p.title }}" />
-              </a>
-            </div>
-          </article>
-        {% endfor %}
-      </div>
-    </section>
-
-    <section id="contact" class="section">
-      <h2 class="h3 fw-bold">Contact</h2>
-      <div class="card-soft">
-        <div><span class="fw-semibold">Email:</span> <a href="mailto:rk010@uark.edu">rk010@uark.edu</a></div>
-        <div><span class="fw-semibold">LinkedIn:</span> <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/reeshad-khan-a50207106/">linkedin.com/in/reeshad-khan-a50207106</a></div>
-        <div><span class="fw-semibold">GitHub:</span> <a target="_blank" rel="noopener" href="https://github.com/Reeshad-Khan">github.com/Reeshad-Khan</a></div>
-      </div>
-    </section>
-
-    <section id="visitors" class="section">
-      <h2 class="h3 fw-bold">Visitors</h2>
-      <p class="text-muted small mb-3">World visitor map + country counts.</p>
-
-      <div class="row g-3">
-
-        <!-- Globe (MapMyVisitors) -->
-        <div class="col-lg-6">
-          <div class="card-soft">
-            <div class="fw-semibold mb-2">World Map</div>
-
->>>>>>> 0c226ef9dde45013ac8b64fe3eb00ff72ccef498
-            {% if site.mapmyvisitors_id %}
-              <div class="map-frame" id="mmvst_container">
-                <script
-                  type="text/javascript"
-                  id="mmvst_globe"
-                  src="https://mapmyvisitors.com/globe.js?d={{ site.mapmyvisitors_id }}">
-                </script>
-              </div>
-            {% else %}
-<<<<<<< HEAD
-              <p class="muted">Add your MapMyVisitors ID in <code>_config.yml</code> to show the globe.</p>
-            {% endif %}
+            <a class="featured-thumb" href="{{ featured_pub.pdf }}" aria-label="Open featured publication">
+              <img src="{{ featured_pub.thumb }}" alt="Preview for {{ featured_pub.title }}" />
+            </a>
           </div>
 
-          <div class="visitor-card">
-            <h3>Country Counter</h3>
-            {% if site.flagcounter_id %}
-              <a target="_blank" rel="noopener" href="https://info.flagcounter.com/{{ site.flagcounter_id }}">
-                <img
-                  src="https://s01.flagcounter.com/count2/{{ site.flagcounter_id }}/bg_FFFFFF/txt_000000/border_CCCCCC/columns_4/maxflags_12/viewers_0/labels_0/pageviews_0/flags_0/percent_0/"
-                  alt="Flag Counter"
-                />
-              </a>
-            {% else %}
-              <p class="muted">Add your FlagCounter ID in <code>_config.yml</code> to show the country counter.</p>
-            {% endif %}
+          <div class="pub-toolbar">
+            <div class="pub-filters" role="tablist" aria-label="Filter publications by status">
+              <button class="filter-chip is-active" type="button" data-filter="all">All</button>
+              <button class="filter-chip" type="button" data-filter="Published">Published</button>
+              <button class="filter-chip" type="button" data-filter="Accepted">Accepted</button>
+              <button class="filter-chip" type="button" data-filter="Under review">Under review</button>
+            </div>
+            <div class="pub-summary">
+              <span><strong>{{ total_pubs }}</strong> total</span>
+              <span><strong>{{ published_count }}</strong> published</span>
+              <span><strong>{{ accepted_count }}</strong> accepted</span>
+              <span><strong>{{ review_count }}</strong> in review</span>
+            </div>
+          </div>
+
+          <div class="pub-stack">
+            {% for p in pubs %}
+              <article class="pub-card" data-status="{{ p.status }}" data-reveal data-reveal-delay="{{ forloop.index0 | times: 60 }}">
+                <div class="pub-main">
+                  <div class="pub-meta-row">
+                    <span class="pub-status">{{ p.status }}</span>
+                    <span class="pub-year">{{ p.year }}</span>
+                  </div>
+                  <h3 class="h5 mb-2">
+                    <a class="pub-title" href="{{ p.pdf }}">{{ p.title }}</a>
+                  </h3>
+                  <div class="pub-authors">{{ p.authors }}</div>
+                  <div class="pub-venue">{{ p.venue }}</div>
+                  <div class="pub-tags">
+                    {% for t in p.tags %}
+                      <span class="tag">{{ t }}</span>
+                    {% endfor %}
+                  </div>
+                  <div class="pub-actions">
+                    <a class="btn btn-sm btn-primary" href="{{ p.pdf }}">PDF</a>
+                  </div>
+                </div>
+
+                <a class="pub-thumb" href="{{ p.pdf }}" aria-label="Open {{ p.title }}">
+                  <img src="{{ p.thumb }}" alt="Thumbnail for {{ p.title }}" />
+                </a>
+              </article>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+
+      <section id="visitors" class="section section-alt" data-reveal>
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">Visitors</div>
+              <h2>Live traffic, presented without a dead panel.</h2>
+            </div>
+            <p>The world map now has a visible loading state and a fallback if the third-party script is blocked.</p>
+          </div>
+
+          <div class="visitor-grid">
+            <article class="glass-card visitor-card">
+              <div class="fw-semibold mb-2">World Map</div>
+              {% if site.mapmyvisitors_id %}
+                <div class="map-frame">
+                  <div id="mmvst_container" aria-live="polite">
+                    <div class="map-loading">Loading visitor map...</div>
+                  </div>
+                  <div id="mmvst_fallback" class="map-fallback" hidden>
+                    The world map could not be loaded here.
+                    <a target="_blank" rel="noopener" href="https://mapmyvisitors.com/globe.js?d={{ site.mapmyvisitors_id }}">Open the widget source</a>
+                  </div>
+                </div>
+              {% else %}
+                <div class="small text-muted">
+                  Add `mapmyvisitors_id` to `_config.yml` to enable the visitor map.
+                </div>
+              {% endif %}
+            </article>
+
+            <article class="glass-card visitor-card">
+              <div class="fw-semibold mb-2">Country Counter</div>
+              {% if site.flagcounter_id %}
+                <a class="flagcounter-frame" target="_blank" rel="noopener" href="https://info.flagcounter.com/{{ site.flagcounter_id }}">
+                  <img
+                    src="https://s01.flagcounter.com/count2/{{ site.flagcounter_id }}/bg_FFFFFF/txt_111827/border_D7DCE5/columns_4/maxflags_12/viewers_0/labels_0/pageviews_0/flags_0/percent_0/"
+                    alt="Flag Counter"
+                  />
+                </a>
+              {% else %}
+                <div class="small text-muted">
+                  Add `flagcounter_id` to `_config.yml` to enable the country counter.
+                </div>
+              {% endif %}
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section" data-reveal>
+        <div class="container">
+          <div class="contact-band">
+            <div>
+              <div class="eyebrow">Contact</div>
+              <h2>Open to research collaborations and technical conversations.</h2>
+            </div>
+            <div class="contact-links">
+              <a href="mailto:rk010@uark.edu">rk010@uark.edu</a>
+              <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/reeshad-khan-a50207106/">LinkedIn</a>
+              <a target="_blank" rel="noopener" href="https://github.com/Reeshad-Khan">GitHub</a>
+            </div>
           </div>
         </div>
       </section>
     </main>
 
-    <footer class="site-footer">
-      <p>&copy; <span id="y"></span> {{ site.title }}</p>
+    <footer class="footer">
+      <div class="container footer-row">
+        <div class="small text-muted">© <span id="y"></span> {{ site.title }}</div>
+        <div class="small text-muted">Built with GitHub Pages and Jekyll</div>
+      </div>
     </footer>
   </div>
 
-  <script src="/assets/js/site.js"></script>
-=======
-              <div class="small text-muted">
-                (Visitor globe will appear after you add your MapMyVisitors ID in <code>_config.yml</code>.)
-              </div>
-            {% endif %}
-          </div>
-        </div>
-
-        <!-- Country counter (FlagCounter) -->
-        <div class="col-lg-6">
-          <div class="card-soft">
-            <div class="fw-semibold mb-2">Country Counter</div>
-
-            {% if site.flagcounter_id %}
-              <a target="_blank" rel="noopener"
-                 href="https://info.flagcounter.com/{{ site.flagcounter_id }}">
-                <img
-                  src="https://s01.flagcounter.com/count2/{{ site.flagcounter_id }}/bg_FFFFFF/txt_000000/border_CCCCCC/columns_4/maxflags_12/viewers_0/labels_0/pageviews_0/flags_0/percent_0/"
-                  alt="Flag Counter"
-                  style="max-width:100%; height:auto;">
-              </a>
-            {% else %}
-              <div class="small text-muted">
-                (Country counter will appear after you add your FlagCounter ID in <code>_config.yml</code>.)
-              </div>
-            {% endif %}
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="footer">
-    <div class="container py-4 d-flex flex-wrap justify-content-between align-items-center gap-2">
-      <div class="small text-muted">© <span id="y"></span> {{ site.title }}</div>
-      <div class="small text-muted">Powered by GitHub Pages + Jekyll</div>
-    </div>
-  </footer>
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="/assets/js/site.js"></script>
+  {% if site.mapmyvisitors_id %}
+  <script>
+    (function () {
+      const container = document.getElementById("mmvst_container");
+      const fallback = document.getElementById("mmvst_fallback");
+      const src = "https://mapmyvisitors.com/globe.js?d={{ site.mapmyvisitors_id }}";
 
->>>>>>> 0c226ef9dde45013ac8b64fe3eb00ff72ccef498
+      if (!container) return;
+
+      function hasWidget() {
+        return !!container.querySelector("canvas, iframe, svg, img");
+      }
+
+      function showFallback() {
+        if (fallback) fallback.hidden = false;
+        if (!hasWidget()) {
+          container.innerHTML = '<div class="map-loading">Visitor map unavailable.</div>';
+        }
+      }
+
+      function loadWidget() {
+        container.innerHTML = '<div class="map-loading">Loading visitor map...</div>';
+        const script = document.createElement("script");
+        script.src = src;
+        script.async = true;
+        script.onerror = showFallback;
+        container.appendChild(script);
+
+        window.setTimeout(function () {
+          if (!hasWidget()) showFallback();
+        }, 4000);
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", loadWidget, { once: true });
+      } else {
+        loadWidget();
+      }
+    })();
+  </script>
+  {% endif %}
 </body>
 </html>

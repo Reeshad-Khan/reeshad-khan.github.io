@@ -1,8 +1,128 @@
-document.getElementById("y").textContent = new Date().getFullYear();
+document.addEventListener("DOMContentLoaded", function () {
+  const yearNode = document.getElementById("y");
+  if (yearNode) yearNode.textContent = new Date().getFullYear();
 
-// Force MapMyVisitors globe to redraw correctly on first load (fixes “blank on fullscreen”)
-window.addEventListener("load", () => {
-  // Some embeds attach late, so trigger resize twice
-  setTimeout(() => window.dispatchEvent(new Event("resize")), 300);
-  setTimeout(() => window.dispatchEvent(new Event("resize")), 1200);
+  initReveals();
+  initCounters();
+  initPublicationFilters();
+  initActiveNav();
 });
+
+function initReveals() {
+  const items = document.querySelectorAll("[data-reveal]");
+  if (!items.length) return;
+
+  const observer = new IntersectionObserver(
+    function (entries, obs) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+
+        const delay = entry.target.getAttribute("data-reveal-delay");
+        if (delay) {
+          entry.target.style.setProperty("--reveal-delay", delay + "ms");
+        }
+
+        entry.target.classList.add("is-visible");
+        obs.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.16, rootMargin: "0px 0px -40px 0px" }
+  );
+
+  items.forEach(function (item) {
+    observer.observe(item);
+  });
+}
+
+function initCounters() {
+  const counters = document.querySelectorAll("[data-counter]");
+  if (!counters.length) return;
+
+  const observer = new IntersectionObserver(
+    function (entries, obs) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        animateCounter(entry.target);
+        obs.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.7 }
+  );
+
+  counters.forEach(function (counter) {
+    observer.observe(counter);
+  });
+}
+
+function animateCounter(node) {
+  const target = Number(node.getAttribute("data-counter"));
+  if (!Number.isFinite(target)) return;
+
+  const start = performance.now();
+  const duration = 900;
+
+  function step(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    node.textContent = String(Math.round(target * eased));
+    if (progress < 1) {
+      requestAnimationFrame(step);
+    } else {
+      node.textContent = String(target);
+    }
+  }
+
+  requestAnimationFrame(step);
+}
+
+function initPublicationFilters() {
+  const buttons = document.querySelectorAll(".filter-chip");
+  const cards = document.querySelectorAll(".pub-card[data-status]");
+  if (!buttons.length || !cards.length) return;
+
+  buttons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      const filter = button.getAttribute("data-filter");
+
+      buttons.forEach(function (btn) {
+        btn.classList.toggle("is-active", btn === button);
+      });
+
+      cards.forEach(function (card) {
+        const matches = filter === "all" || card.getAttribute("data-status") === filter;
+        card.classList.toggle("is-hidden", !matches);
+      });
+    });
+  });
+}
+
+function initActiveNav() {
+  const sections = document.querySelectorAll("main section[id]");
+  const links = document.querySelectorAll(".nav-link[href^='#']");
+  if (!sections.length || !links.length) return;
+
+  const lookup = {};
+  links.forEach(function (link) {
+    lookup[link.getAttribute("href").slice(1)] = link;
+  });
+
+  const observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+
+        links.forEach(function (link) {
+          link.classList.remove("is-active");
+        });
+
+        const active = lookup[entry.target.id];
+        if (active) active.classList.add("is-active");
+      });
+    },
+    { rootMargin: "-35% 0px -50% 0px", threshold: 0.01 }
+  );
+
+  sections.forEach(function (section) {
+    observer.observe(section);
+  });
+}
