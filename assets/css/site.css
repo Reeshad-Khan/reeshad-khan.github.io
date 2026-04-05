@@ -568,36 +568,27 @@ a:hover{
   border:1px solid var(--line);
   background:#fff;
   overflow:hidden;
-}
-
-#mmvst_container{
-  width:100%;
-  min-height:340px;
-}
-
-.map-loading{
-  min-height:340px;
   display:flex;
-  align-items:center;
+  align-items:flex-start;
   justify-content:center;
-  color:var(--muted);
-  text-align:center;
+  padding:1rem 0.75rem 0;
 }
 
-.map-fallback{
-  padding:1rem;
-  border-top:1px solid var(--line);
-  color:var(--muted);
-  background:#f8fafc;
+.map-script-anchor{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  min-height:320px;
 }
 
-.map-frame iframe,
-.map-frame canvas,
-.map-frame svg{
-  display:block !important;
-  width:100% !important;
-  height:340px !important;
-  max-width:100% !important;
+.map-frame .mmvst_outer{
+  margin:0 auto !important;
+  max-width:100%;
+}
+
+.map-frame .mmvst_inner,
+.map-frame .mmvst_globe{
+  margin:0 auto !important;
 }
 
 .flagcounter-frame{

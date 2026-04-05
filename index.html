@@ -302,12 +302,12 @@ layout: none
               <div class="fw-semibold mb-2">World Map</div>
               {% if site.mapmyvisitors_id %}
                 <div class="map-frame">
-                  <div id="mmvst_container" aria-live="polite">
-                    <div class="map-loading">Loading visitor map...</div>
-                  </div>
-                  <div id="mmvst_fallback" class="map-fallback" hidden>
-                    The world map could not be loaded here.
-                    <a target="_blank" rel="noopener" href="https://mapmyvisitors.com/globe.js?d={{ site.mapmyvisitors_id }}">Open the widget source</a>
+                  <div class="map-script-anchor" aria-hidden="true">
+                    <script
+                      id="mmvst_globe"
+                      type="text/javascript"
+                      src="https://mapmyvisitors.com/globe.js?d={{ site.mapmyvisitors_id }}&cl=3dc0ff&w=a"
+                    ></script>
                   </div>
                 </div>
               {% else %}
@@ -363,46 +363,5 @@ layout: none
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="/assets/js/site.js"></script>
-  {% if site.mapmyvisitors_id %}
-  <script>
-    (function () {
-      const container = document.getElementById("mmvst_container");
-      const fallback = document.getElementById("mmvst_fallback");
-      const src = "https://mapmyvisitors.com/globe.js?d={{ site.mapmyvisitors_id }}";
-
-      if (!container) return;
-
-      function hasWidget() {
-        return !!container.querySelector("canvas, iframe, svg, img");
-      }
-
-      function showFallback() {
-        if (fallback) fallback.hidden = false;
-        if (!hasWidget()) {
-          container.innerHTML = '<div class="map-loading">Visitor map unavailable.</div>';
-        }
-      }
-
-      function loadWidget() {
-        container.innerHTML = '<div class="map-loading">Loading visitor map...</div>';
-        const script = document.createElement("script");
-        script.src = src;
-        script.async = true;
-        script.onerror = showFallback;
-        container.appendChild(script);
-
-        window.setTimeout(function () {
-          if (!hasWidget()) showFallback();
-        }, 4000);
-      }
-
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", loadWidget, { once: true });
-      } else {
-        loadWidget();
-      }
-    })();
-  </script>
-  {% endif %}
 </body>
 </html>
