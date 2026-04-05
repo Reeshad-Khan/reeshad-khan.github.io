@@ -53,12 +53,13 @@ layout: none
             <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
             <li class="nav-item"><a class="nav-link" href="#news">News</a></li>
             <li class="nav-item"><a class="nav-link" href="#research">Research</a></li>
-            <li class="nav-item"><a class="nav-link" href="#demos">Demos</a></li>
+            <li class="nav-item"><a class="nav-link" href="#service">Service</a></li>
             <li class="nav-item"><a class="nav-link" href="#publications">Publications</a></li>
-            <li class="nav-item"><a class="nav-link" href="#visitors">Visitors</a></li>
-            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+            <li class="nav-item"><a class="nav-link" href="#demos">Demos</a></li>
             <li class="nav-item"><a class="nav-link" href="#gallery">Images</a></li>
             <li class="nav-item"><a class="nav-link" href="#students">Students</a></li>
+            <li class="nav-item"><a class="nav-link" href="#visitors">Visitors</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
           </ul>
         </div>
       </div>
@@ -320,69 +321,22 @@ layout: none
         </div>
       </section>
 
-      <section id="visitors" class="section section-alt" data-reveal>
+      <section id="service" class="section section-alt" data-reveal>
         <div class="container">
           <div class="section-head">
             <div>
-              <div class="eyebrow">Visitors</div>
-              <h2>Live traffic, presented without a dead panel.</h2>
+              <div class="eyebrow">Professional Service</div>
+              <h2>Reviewer activity</h2>
             </div>
-            <p>The world map now has a visible loading state and a fallback if the third-party script is blocked.</p>
           </div>
 
-          <div class="visitor-grid">
-            <article class="glass-card visitor-card">
-              <div class="fw-semibold mb-2">World Map</div>
-              {% if site.mapmyvisitors_id %}
-                <div class="map-frame">
-                  <div class="map-script-anchor" aria-hidden="true">
-                    <script
-                      id="mmvst_globe"
-                      type="text/javascript"
-                      src="https://mapmyvisitors.com/globe.js?d={{ site.mapmyvisitors_id }}&cl=3dc0ff&w=260"
-                    ></script>
-                  </div>
-                </div>
-              {% else %}
-                <div class="small text-muted">
-                  Add `mapmyvisitors_id` to `_config.yml` to enable the visitor map.
-                </div>
-              {% endif %}
+          <div class="service-list">
+            <article class="service-card">
+              <strong>Reviewer, ICASSP 2026</strong>
             </article>
-
-            <article class="glass-card visitor-card">
-              <div class="fw-semibold mb-2">Country Counter</div>
-              {% if site.flagcounter_id %}
-                <a class="flagcounter-frame" target="_blank" rel="noopener" href="https://info.flagcounter.com/{{ site.flagcounter_id }}">
-                  <img
-                    src="https://s01.flagcounter.com/count2/{{ site.flagcounter_id }}/bg_FFFFFF/txt_111827/border_D7DCE5/columns_4/maxflags_12/viewers_0/labels_0/pageviews_0/flags_0/percent_0/"
-                    alt="Flag Counter"
-                  />
-                </a>
-              {% else %}
-                <div class="small text-muted">
-                  Add `flagcounter_id` to `_config.yml` to enable the country counter.
-                </div>
-              {% endif %}
+            <article class="service-card">
+              <strong>Reviewer, IEEE Big Data 2022</strong>
             </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" class="section" data-reveal>
-        <div class="container">
-          <div class="contact-band">
-            <div>
-              <div class="eyebrow">Contact</div>
-              <h2>Open to research collaborations and technical conversations.</h2>
-            </div>
-            <div class="contact-links">
-              <a href="mailto:rk010@uark.edu">rk010@uark.edu</a>
-              <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/reeshad-khan-ph-d-a50207106">LinkedIn</a>
-              <a target="_blank" rel="noopener" href="https://scholar.google.com/citations?user=D3rO3W4AAAAJ">Google Scholar</a>
-              <a target="_blank" rel="noopener" href="https://www.uark.edu">University of Arkansas</a>
-              <a target="_blank" rel="noopener" href="https://github.com/Reeshad-Khan">GitHub</a>
-            </div>
           </div>
         </div>
       </section>
@@ -516,6 +470,72 @@ layout: none
             <a class="student-card" target="_blank" rel="noopener" href="https://scholarworks.uark.edu/elegreu/4/"><span class="student-index">10</span><strong>DNP3 Attack Vectors in Arkansas Nuclear One Testbed</strong><span>David Nystrom</span></a>
             <a class="student-card" target="_blank" rel="noopener" href="https://scholarworks.uark.edu/elegreu/10/"><span class="student-index">11</span><strong>GHOST Network: Intrusion Detection System Using Security Onion</strong><span>Richard Stokes</span></a>
             <a class="student-card" target="_blank" rel="noopener" href="https://scholarworks.uark.edu/elegreu/5/"><span class="student-index">12</span><strong>Side Channel Attack (SCA) of AES in FPGAs and Microcontrollers</strong><span>Donna Thakadipuram</span></a>
+          </div>
+        </div>
+      </section>
+
+      <section id="visitors" class="section" data-reveal>
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">Visitors</div>
+              <h2>Visitor map and country counter</h2>
+            </div>
+          </div>
+
+          <div class="visitor-grid">
+            <article class="glass-card visitor-card">
+              <div class="fw-semibold mb-2">World Map</div>
+              {% if site.mapmyvisitors_id %}
+                <div class="map-frame">
+                  <div class="map-script-anchor" aria-hidden="true">
+                    <script
+                      id="mmvst_globe"
+                      type="text/javascript"
+                      src="https://mapmyvisitors.com/globe.js?d={{ site.mapmyvisitors_id }}&cl=3dc0ff&w=260"
+                    ></script>
+                  </div>
+                </div>
+              {% else %}
+                <div class="small text-muted">
+                  Add `mapmyvisitors_id` to `_config.yml` to enable the visitor map.
+                </div>
+              {% endif %}
+            </article>
+
+            <article class="glass-card visitor-card">
+              <div class="fw-semibold mb-2">Country Counter</div>
+              {% if site.flagcounter_id %}
+                <a class="flagcounter-frame" target="_blank" rel="noopener" href="https://info.flagcounter.com/{{ site.flagcounter_id }}">
+                  <img
+                    src="https://s01.flagcounter.com/count2/{{ site.flagcounter_id }}/bg_FFFFFF/txt_111827/border_D7DCE5/columns_4/maxflags_12/viewers_0/labels_0/pageviews_0/flags_0/percent_0/"
+                    alt="Flag Counter"
+                  />
+                </a>
+              {% else %}
+                <div class="small text-muted">
+                  Add `flagcounter_id` to `_config.yml` to enable the country counter.
+                </div>
+              {% endif %}
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section section-alt" data-reveal>
+        <div class="container">
+          <div class="contact-band">
+            <div>
+              <div class="eyebrow">Contact</div>
+              <h2>Open to research collaborations and technical conversations.</h2>
+            </div>
+            <div class="contact-links">
+              <a href="mailto:rk010@uark.edu">rk010@uark.edu</a>
+              <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/reeshad-khan-ph-d-a50207106">LinkedIn</a>
+              <a target="_blank" rel="noopener" href="https://scholar.google.com/citations?user=D3rO3W4AAAAJ">Google Scholar</a>
+              <a target="_blank" rel="noopener" href="https://www.uark.edu">University of Arkansas</a>
+              <a target="_blank" rel="noopener" href="https://github.com/Reeshad-Khan">GitHub</a>
+            </div>
           </div>
         </div>
       </section>
