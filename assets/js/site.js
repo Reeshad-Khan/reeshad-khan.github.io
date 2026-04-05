@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initCounters();
   initPublicationFilters();
   initActiveNav();
+  initGallery();
 });
 
 function initReveals() {
@@ -125,4 +126,69 @@ function initActiveNav() {
   sections.forEach(function (section) {
     observer.observe(section);
   });
+}
+
+function initGallery() {
+  const gallery = document.querySelector("[data-gallery]");
+  if (!gallery) return;
+
+  const slides = Array.from(gallery.querySelectorAll(".gallery-slide"));
+  const dots = Array.from(gallery.querySelectorAll(".gallery-dot"));
+  const prev = gallery.querySelector("[data-gallery-prev]");
+  const next = gallery.querySelector("[data-gallery-next]");
+
+  if (!slides.length) return;
+
+  let index = 0;
+  let timer = null;
+
+  function render(newIndex) {
+    index = (newIndex + slides.length) % slides.length;
+
+    slides.forEach(function (slide, idx) {
+      slide.classList.toggle("is-active", idx === index);
+    });
+
+    dots.forEach(function (dot, idx) {
+      dot.classList.toggle("is-active", idx === index);
+    });
+  }
+
+  function start() {
+    stop();
+    timer = window.setInterval(function () {
+      render(index + 1);
+    }, 3500);
+  }
+
+  function stop() {
+    if (timer) window.clearInterval(timer);
+  }
+
+  if (prev) {
+    prev.addEventListener("click", function () {
+      render(index - 1);
+      start();
+    });
+  }
+
+  if (next) {
+    next.addEventListener("click", function () {
+      render(index + 1);
+      start();
+    });
+  }
+
+  dots.forEach(function (dot, idx) {
+    dot.addEventListener("click", function () {
+      render(idx);
+      start();
+    });
+  });
+
+  gallery.addEventListener("mouseenter", stop);
+  gallery.addEventListener("mouseleave", start);
+
+  render(0);
+  start();
 }
