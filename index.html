@@ -486,7 +486,26 @@ layout: none
           <div class="visitor-grid">
             <article class="glass-card visitor-card">
               <div class="fw-semibold mb-2">World Map</div>
-              {% if site.mapmyvisitors_id %}
+              {% if site.mapmyvisitors_map_id %}
+                <div class="map-frame">
+                  <div class="map-script-anchor" aria-hidden="true">
+                    <script
+                      id="mapmyvisitors"
+                      type="text/javascript"
+                      src="https://mapmyvisitors.com/map.js?d={{ site.mapmyvisitors_map_id }}&cl=ffffff&w=a"
+                    ></script>
+                  </div>
+                </div>
+              {% elsif site.pulsemaps_map_url %}
+                <div class="visitor-map-frame">
+                  <iframe
+                    src="{{ site.pulsemaps_map_url }}"
+                    title="Visitor map"
+                    loading="lazy"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                  ></iframe>
+                </div>
+              {% elsif site.mapmyvisitors_id %}
                 <div class="map-frame">
                   <div class="map-script-anchor" aria-hidden="true">
                     <script
@@ -498,7 +517,7 @@ layout: none
                 </div>
               {% else %}
                 <div class="small text-muted">
-                  Add `mapmyvisitors_id` to `_config.yml` to enable the visitor map.
+                  Add `mapmyvisitors_map_id`, `pulsemaps_map_url`, or `mapmyvisitors_id` to `_config.yml` to enable the visitor map.
                 </div>
               {% endif %}
             </article>
