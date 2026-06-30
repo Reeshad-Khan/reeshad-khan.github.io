@@ -62,7 +62,7 @@
     - "Segmentation"
     - "Autonomous Driving"
   pdf: "/assets/papers/Beyond_Bayer__Task_Optimal_Sensor_Co_Design_for_Robust_Autonomous_Driving_Segmentation-2.pdf"
-  thumb: "/assets/img/papers/l2s_driving.png"
+  thumb: "/assets/img/papers/Beyond_Bayer.png"
 
 - key: "l2s_driving"
   title: "Learning to Sense for Driving: Joint Optics-Sensor-Model Co-Design for Semantic Segmentation"
