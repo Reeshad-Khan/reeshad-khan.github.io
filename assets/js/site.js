@@ -152,7 +152,7 @@ function initNavShadow() {
 }
 
 function initAutoStagger() {
-  var containers = document.querySelectorAll(".timeline, .research-grid, .student-grid, .hero-stats, .service-list");
+  var containers = document.querySelectorAll(".timeline, .research-grid, .student-grid, .hero-stats, .service-list, .edu-stack, .about-rail");
   containers.forEach(function (container) {
     var children = Array.from(container.querySelectorAll("[data-reveal]"));
     children.forEach(function (child, idx) {
