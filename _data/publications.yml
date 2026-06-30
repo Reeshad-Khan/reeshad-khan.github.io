@@ -1,13 +1,14 @@
 - key: "tinybev"
   title: "TinyBEV: Cross-Modal Knowledge Distillation for Efficient Multi-Task BEV Perception and Planning"
-  venue: "ICCV Workshop (WDFM), 2025"
+  venue: "ICCV Workshop (WDFM), 2025; CVPR DriveX Workshop, 2026"
   status: "Published"
-  authors: "Reeshad Khan et al."
-  year: 2025
+  authors: "Reeshad Khan, John M. Gauch"
+  year: 2026
   tags:
     - "BEV"
     - "EdgeAI"
     - "Distillation"
+    - "Knowledge Distillation"
   pdf: "/assets/papers/tinybev.pdf"
   thumb: "/assets/img/papers/tinybev.png"
 
@@ -65,9 +66,9 @@
 
 - key: "l2s_driving"
   title: "Learning to Sense for Driving: Joint Optics-Sensor-Model Co-Design for Semantic Segmentation"
-  venue: "CVPR, 2026"
+  venue: "ECCV Workshop, 2026 (arXiv preprint)"
   status: "Under review"
-  authors: "Reeshad Khan, John Gauch"
+  authors: "Reeshad Khan, John M. Gauch"
   year: 2026
   tags:
     - "RAW-to-task"

@@ -1,10 +1,22 @@
-- date: “2026-06-30”
-  icon: “🚗”
-  text: “New preprint: Beyond Bayer: Task-Optimal Sensor Co-Design for Robust Autonomous Driving Segmentation.”
+- date: "2026-07-01"
+  icon: "🏢"
+  text: "Joining the University of Central Florida (CECS) as an Incoming Postdoctoral Scholar under Dr. Xishun Liao, focusing on AI-powered mobility, digital twins, and spatiotemporal trajectory modeling."
 
-- date: “2025-12-08”
-  icon: “🎓”
-  text: “Successfully defended Ph.D. dissertation: “Efficient Deep Neural Networks for Autonomous Perception.””
+- date: "2026-06-30"
+  icon: "🚗"
+  text: "New preprint: Beyond Bayer - Task-Optimal Sensor Co-Design for Robust Autonomous Driving Segmentation."
+
+- date: "2026-03-01"
+  icon: "🏆"
+  text: "TinyBEV accepted as a poster at CVPR DriveX Workshop 2026 (avg. reviewer score 8.0/10)."
+
+- date: "2026-01-15"
+  icon: "📄"
+  text: "L2S Driving arXiv preprint released and submitted to ECCV Workshop 2026: Learning to Sense for Driving."
+
+- date: "2025-12-08"
+  icon: "🎓"
+  text: "Successfully defended Ph.D. dissertation: Efficient Deep Neural Networks for Autonomous Perception."
 
 - date: "2026-01-01"
   icon: "✨"
@@ -24,7 +36,7 @@
 
 - date: "2024-01-01"
   icon: "🏅"
-  text: "Award: Reginald R. “Barney” & Jameson A. Baxter Graduate Fellowship (2024)."
+  text: "Award: Reginald R. Baxter Graduate Fellowship (2024)."
 
 - date: "2023-01-01"
   icon: "🏅"
