@@ -2,11 +2,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const yearNode = document.getElementById("y");
   if (yearNode) yearNode.textContent = new Date().getFullYear();
 
+  initAutoStagger();
   initReveals();
   initCounters();
   initPublicationFilters();
   initActiveNav();
   initGallery();
+  initScrollProgress();
+  initNavShadow();
 });
 
 function initReveals() {
@@ -125,6 +128,38 @@ function initActiveNav() {
 
   sections.forEach(function (section) {
     observer.observe(section);
+  });
+}
+
+function initScrollProgress() {
+  var bar = document.getElementById("scroll-progress");
+  if (!bar) return;
+  function update() {
+    var scrolled = window.scrollY;
+    var total = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (total > 0 ? (scrolled / total) * 100 : 0) + "%";
+  }
+  window.addEventListener("scroll", update, { passive: true });
+  update();
+}
+
+function initNavShadow() {
+  var nav = document.querySelector(".site-nav");
+  if (!nav) return;
+  window.addEventListener("scroll", function () {
+    nav.classList.toggle("is-scrolled", window.scrollY > 30);
+  }, { passive: true });
+}
+
+function initAutoStagger() {
+  var containers = document.querySelectorAll(".timeline, .research-grid, .student-grid, .hero-stats, .service-list");
+  containers.forEach(function (container) {
+    var children = Array.from(container.querySelectorAll("[data-reveal]"));
+    children.forEach(function (child, idx) {
+      if (!child.hasAttribute("data-reveal-delay")) {
+        child.setAttribute("data-reveal-delay", String(idx * 90));
+      }
+    });
   });
 }
 
