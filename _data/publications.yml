@@ -49,6 +49,20 @@
   pdf: "/assets/papers/sure_extensions_cvc.pdf"
   thumb: "/assets/img/papers/sure_extensions_cvc.png"
 
+- key: "beyond_bayer"
+  title: "Beyond Bayer: Task-Optimal Sensor Co-Design for Robust Autonomous Driving Segmentation"
+  venue: "Under review"
+  status: "Under review"
+  authors: "Reeshad Khan, John Gauch"
+  year: 2026
+  tags:
+    - "RAW-to-task"
+    - "Sensing"
+    - "Segmentation"
+    - "Autonomous Driving"
+  pdf: "/assets/papers/Beyond_Bayer__Task_Optimal_Sensor_Co_Design_for_Robust_Autonomous_Driving_Segmentation-2.pdf"
+  thumb: "/assets/img/papers/l2s_driving.png"
+
 - key: "l2s_driving"
   title: "Learning to Sense for Driving: Joint Optics-Sensor-Model Co-Design for Semantic Segmentation"
   venue: "CVPR, 2026"

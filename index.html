@@ -68,8 +68,10 @@ layout: none
     <header id="top" class="hero">
       <div class="hero-orb hero-orb-a"></div>
       <div class="hero-orb hero-orb-b"></div>
+      <div class="hero-orb hero-orb-c"></div>
       <div class="container hero-grid">
         <div class="hero-copy" data-reveal>
+          <div class="avail-badge"><span class="avail-dot"></span>Open to research &amp; industry positions</div>
           <div class="eyebrow">Researcher in edge intelligence and sensing-aware autonomy</div>
           <h1>Building efficient perception systems that survive real-world constraints.</h1>
           <p class="hero-lead">
@@ -254,7 +256,7 @@ layout: none
             </div>
           </div>
 
-          <div class="featured-publication">
+          <div class="featured-publication" data-status="{{ featured_pub.status }}">
             <div class="featured-copy">
               <div class="featured-label">Featured publication</div>
               <h3><a href="{{ featured_pub.pdf }}">{{ featured_pub.title }}</a></h3>

@@ -1,6 +1,10 @@
-- date: "2025-12-08"
-  icon: "🎓"
-  text: "Successfully defended Ph.D. dissertation: “Efficient Deep Neural Networks for Autonomous Perception.”"
+- date: “2026-06-30”
+  icon: “🚗”
+  text: “New preprint: Beyond Bayer: Task-Optimal Sensor Co-Design for Robust Autonomous Driving Segmentation.”
+
+- date: “2025-12-08”
+  icon: “🎓”
+  text: “Successfully defended Ph.D. dissertation: “Efficient Deep Neural Networks for Autonomous Perception.””
 
 - date: "2026-01-01"
   icon: "✨"
