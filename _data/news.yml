@@ -1,3 +1,15 @@
+- date: "2026-08-15"
+  icon: "🎬"
+  text: "New demo: Orlando Mobility Digital Twin, a generative simulation of urban mobility built with Dr. Xishun Liao's group at UCF."
+
+- date: "2026-08-01"
+  icon: "📄"
+  text: "Two new manuscripts submitted to WACV 2027: 'BAViR: Aligning Urban Visual Representations with Revealed Mobility Behavior' (Applications Track) and 'How Much of the Bench2Drive Leaderboard Is Noise?' (Evaluations and Datasets Track)."
+
+- date: "2026-07-15"
+  icon: "🏛️"
+  text: "Named Lead Organizer and Primary Contact for UrbanState @ WACV 2027, a workshop on multimodal urban sensing and representation for autonomous mobility, with UCF, Purdue, USF, and the University of Arkansas."
+
 - date: "2026-07-01"
   icon: "🏢"
   text: "Joining the University of Central Florida (CECS) as a Postdoctoral Scholar under Dr. Xishun Liao, focusing on AI-powered mobility, digital twins, and spatiotemporal trajectory modeling."

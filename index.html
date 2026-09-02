@@ -18,7 +18,8 @@ layout: none
     {% assign review_count = review_count | plus: 1 %}
   {% endif %}
 {% endfor %}
-{% assign featured_pub = pubs.first %}
+{% assign featured_list = pubs | where: "featured", true %}
+{% assign featured_pub = featured_list.first | default: pubs.first %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -218,7 +219,7 @@ layout: none
 
           <div class="edu-stack">
             <article class="edu-card edu-card--phd" data-reveal>
-              <div class="edu-year">2021 – 2026</div>
+              <div class="edu-year">2021 – 2025</div>
               <div class="edu-body">
                 <strong class="edu-degree">Ph.D., Computer Science</strong>
                 <span class="edu-school">University of Arkansas, Fayetteville, AR</span>
@@ -234,17 +235,18 @@ layout: none
               </div>
             </article>
             <article class="edu-card edu-card--ms" data-reveal>
-              <div class="edu-year">2021</div>
+              <div class="edu-year">2019 – 2021</div>
               <div class="edu-body">
                 <strong class="edu-degree">M.S., Computer Science and Technology</strong>
                 <span class="edu-school">Chang'an University, Xi'an, China</span>
+                <span class="edu-detail">Chinese Government Belt and Road Scholarship</span>
               </div>
             </article>
             <article class="edu-card edu-card--bs" data-reveal>
-              <div class="edu-year">2012</div>
+              <div class="edu-year">2012 – 2016</div>
               <div class="edu-body">
                 <strong class="edu-degree">B.S., Computer Science and Engineering</strong>
-                <span class="edu-school">Bangladesh</span>
+                <span class="edu-school">University of Liberal Arts Bangladesh</span>
               </div>
             </article>
           </div>
@@ -320,7 +322,7 @@ layout: none
           <div class="featured-publication" data-status="{{ featured_pub.status }}">
             <div class="featured-copy">
               <div class="featured-label">Featured publication</div>
-              <h3><a href="{{ featured_pub.pdf }}">{{ featured_pub.title }}</a></h3>
+              <h3>{% if featured_pub.pdf %}<a href="{{ featured_pub.pdf }}">{{ featured_pub.title }}</a>{% else %}{{ featured_pub.title }}{% endif %}</h3>
               <p>{{ featured_pub.authors }} · <span>{{ featured_pub.venue }}</span></p>
               <div class="pub-tags">
                 {% for t in featured_pub.tags %}
@@ -328,13 +330,17 @@ layout: none
                 {% endfor %}
               </div>
               <div class="featured-actions">
-                <a class="btn btn-primary" href="{{ featured_pub.pdf }}">Read Paper</a>
+                {% if featured_pub.pdf %}
+                  <a class="btn btn-primary" href="{{ featured_pub.pdf }}">Read Paper</a>
+                {% endif %}
                 <span class="pub-status is-inline">{{ featured_pub.status }}</span>
               </div>
             </div>
-            <a class="featured-thumb" href="{{ featured_pub.pdf }}" aria-label="Open featured publication">
-              <img src="{{ featured_pub.thumb }}" alt="Preview for {{ featured_pub.title }}" />
-            </a>
+            {% if featured_pub.thumb %}
+              <a class="featured-thumb" href="{{ featured_pub.pdf | default: '#' }}" aria-label="Open featured publication">
+                <img src="{{ featured_pub.thumb }}" alt="Preview for {{ featured_pub.title }}" />
+              </a>
+            {% endif %}
           </div>
 
           <div class="pub-toolbar">
@@ -361,7 +367,11 @@ layout: none
                     <span class="pub-year">{{ p.year }}</span>
                   </div>
                   <h3 class="h5 mb-2">
-                    <a class="pub-title" href="{{ p.pdf }}">{{ p.title }}</a>
+                    {% if p.pdf %}
+                      <a class="pub-title" href="{{ p.pdf }}">{{ p.title }}</a>
+                    {% else %}
+                      <span class="pub-title pub-title--static">{{ p.title }}</span>
+                    {% endif %}
                   </h3>
                   <div class="pub-authors">{{ p.authors }}</div>
                   <div class="pub-venue">{{ p.venue }}</div>
@@ -371,13 +381,23 @@ layout: none
                     {% endfor %}
                   </div>
                   <div class="pub-actions">
-                    <a class="btn btn-sm btn-primary" href="{{ p.pdf }}">PDF</a>
+                    {% if p.pdf %}
+                      <a class="btn btn-sm btn-primary" href="{{ p.pdf }}">PDF</a>
+                    {% else %}
+                      <span class="pub-pending">Preprint pending</span>
+                    {% endif %}
                   </div>
                 </div>
 
-                <a class="pub-thumb" href="{{ p.pdf }}" aria-label="Open {{ p.title }}">
-                  <img src="{{ p.thumb }}" alt="Thumbnail for {{ p.title }}" />
-                </a>
+                {% if p.thumb %}
+                  <a class="pub-thumb" href="{{ p.pdf | default: '#' }}" aria-label="Open {{ p.title }}">
+                    <img src="{{ p.thumb }}" alt="Thumbnail for {{ p.title }}" />
+                  </a>
+                {% else %}
+                  <div class="pub-thumb pub-thumb--placeholder" aria-hidden="true">
+                    <span>{{ p.year }}</span>
+                  </div>
+                {% endif %}
               </article>
             {% endfor %}
           </div>
@@ -394,6 +414,22 @@ layout: none
           </div>
 
           <div class="service-list">
+            <article class="service-card service-card--org" data-reveal>
+              <span class="service-type">Lead Organizer &amp; Primary Contact</span>
+              <strong>UrbanState @ WACV 2027 — Multimodal Urban Sensing and Representation for Autonomous Mobility</strong>
+              <span class="service-detail">Half-day workshop with archival proceedings · Orlando, FL · Jan 5, 2027</span>
+              <div class="mini-link">
+                <a target="_blank" rel="noopener" href="https://urbanstate-wacv.github.io/">Workshop site →</a>
+              </div>
+            </article>
+            <article class="service-card" data-reveal>
+              <span class="service-type">Journal Review</span>
+              <strong>IEEE Open Journal of Intelligent Transportation Systems, 2026</strong>
+            </article>
+            <article class="service-card" data-reveal>
+              <span class="service-type">Peer Review</span>
+              <strong>ECCV DriveX Workshop, 2026</strong>
+            </article>
             <article class="service-card" data-reveal>
               <span class="service-type">Peer Review</span>
               <strong>ICML SCALE Workshop, 2026</strong>
@@ -432,6 +468,15 @@ layout: none
           </div>
 
           <div class="demo-grid">
+            <article class="demo-card">
+              <div class="demo-video">
+                <video controls preload="metadata" playsinline>
+                  <source src="/assets/vid/Orlando_Mobility_Twin_Demo_Inline.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <div class="demo-label">Orlando Mobility Digital Twin — UCF CECS</div>
+            </article>
+
             <article class="demo-card">
               <div class="demo-video">
                 <iframe
@@ -630,7 +675,7 @@ layout: none
               <h2>Open to research collaborations and technical conversations.</h2>
             </div>
             <div class="contact-links">
-              <a href="mailto:re141872@ucf.edu">re141872@ucf.edu</a>
+              <a href="mailto:reeshad.khan@ucf.edu">reeshad.khan@ucf.edu</a>
               <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/reeshad-khan-ph-d-a50207106">LinkedIn</a>
               <a target="_blank" rel="noopener" href="https://scholar.google.com/citations?user=D3rO3W4AAAAJ">Google Scholar</a>
               <a target="_blank" rel="noopener" href="https://www.ucf.edu">UCF</a>

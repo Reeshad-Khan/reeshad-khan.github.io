@@ -4,6 +4,7 @@
   status: "Published"
   authors: "Reeshad Khan, John M. Gauch"
   year: 2026
+  featured: true
   tags:
     - "BEV"
     - "EdgeAI"
@@ -52,10 +53,10 @@
 
 - key: "beyond_bayer"
   title: "Beyond Bayer: Task-Optimal Sensor Co-Design for Robust Autonomous Driving Segmentation"
-  venue: "Under review"
+  venue: "WACV 2027, Algorithms Track (under review)"
   status: "Under review"
-  authors: "Reeshad Khan, John Gauch"
-  year: 2026
+  authors: "Reeshad Khan, Vy Ho, John M. Gauch"
+  year: 2027
   tags:
     - "RAW-to-task"
     - "Sensing"
@@ -76,3 +77,25 @@
     - "Segmentation"
   pdf: "/assets/papers/l2s_driving.pdf"
   thumb: "/assets/img/papers/l2s_driving.png"
+
+- key: "bench2drive_noise_audit"
+  title: "How Much of the Bench2Drive Leaderboard Is Noise? A Seed-Variance Audit of Closed-Loop Driving Evaluation"
+  venue: "WACV 2027, Evaluations and Datasets Track"
+  status: "Under review"
+  authors: "Reeshad Khan, Xishun Liao"
+  year: 2027
+  tags:
+    - "Evaluation"
+    - "Closed-Loop Driving"
+    - "Benchmarking"
+
+- key: "bavir"
+  title: "BAViR: Aligning Urban Visual Representations with Revealed Mobility Behavior"
+  venue: "WACV 2027, Applications Track"
+  status: "Under review"
+  authors: "Reeshad Khan, Xishun Liao"
+  year: 2027
+  tags:
+    - "Urban Mobility"
+    - "Representation Learning"
+    - "Digital Twins"
